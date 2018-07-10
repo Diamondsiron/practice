@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>滑动标尺</title>
+    <link rel="stylesheet" href="ruler.css"/>
+    <script type="text/javascript" src='jquery-1.11.1.min.js'></script>
+    <script type="text/javascript" src="ruler.js"></script>
+    <style type="text/css">
+    	
+
+
+    </style>
+</head>
+
+<body>
+	
+	<div id='box'>
+		<div id='value'><span class='value'>0</span><span id='unit'>cm</span></div>
+		<div id='rulerWrapper'></div>
+		
+	</div>
+
+	<script type="text/javascript">
+		//初始化尺子
+		var measureRuler =new MeasureRuler({
+			wrapperId:"rulerWrapper",
+			max:200,
+			minUnit:1,
+			unitSet:10,
+			mult:1,
+			value:160,
+			callback:rulerSetValue
+		})
+
+		function rulerSetValue(val){
+			$(".value").html(val)
+		}
+
+		
+
+	
+
+
+
+	</script>
+
+</body>
+
+</html>

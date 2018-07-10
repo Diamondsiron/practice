@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+ul { list-style:none; margin:0; padding:0; text-align:center; background:#F03; color:#FFF; -webkit-transform:scaleY(0); -webkit-transform-origin:0 0; }
+li { padding:0; margin:0; }
+div { width:200px; }
+.b { -webkit-animation:ulShow 0.4s; -webkit-animation-fill-mode:forwards; -webkit-animation-timing-function: cubic-bezier(0,0.8,0.9,1); }
+
+div div { height:30px; line-height:30px; text-align:center; background-color:#FC0; }
+@-webkit-keyframes ulShow {
+    from { -webkit-transform:scaleY(0); }
+    to { -webkit-transform:scaleY(1); }
+}
+.c { -webkit-animation:ulUnShow 0.4s; -webkit-animation-fill-mode:forwards; -webkit-animation-timing-function: cubic-bezier(0,0.8,0.9,1); }
+@-webkit-keyframes ulUnShow {
+    from { -webkit-transform:scaleY(1); }
+    to { -webkit-transform:scaleY(0); }
+}
+</style>
+<div>
+  <div id="a">下拉 </div>
+  <ul id="b" class="b">
+      <li>第一个</li>
+      <li>第二个</li>
+      <li>第三个</li>
+  </ul>
+</div>
+<script>
+  document.getElementById("a").addEventListener("click",function(){
+    if(document.getElementById("b").className=='b'){
+      document.getElementById("b").className="c"
+    }else{
+      document.getElementById("b").className="b"
+    }
+    
+  })
+</script>
+</body>
+</html>

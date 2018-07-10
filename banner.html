@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/banner.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="banner">
+    <div class="banner-window">
+      <ul class="banner-container" id="list">
+        <li>
+          <img src="./img/1.png" alt="1">
+        </li>
+        <li>
+            <img src="./img/2.png" alt="1">
+          </li>
+          <li>
+              <img src="./img/3.png" alt="1">
+            </li>
+            <li>
+                <img src="./img/4.png" alt="1">
+              </li>
+              <li>
+                  <img src="./img/5.png" alt="1">
+                </li>
+      </ul>
+      <ul class="banner-direction">
+        <li class="left">
+          左
+        </li>
+        <li class="right">
+          右
+        </li>
+      </ul>
+      <ul class="banner-dots">
+        <li>
+          1
+        </li>
+        <li>
+           2
+          </li>
+          <li>
+              3
+            </li>
+            <li>
+                4
+              </li>
+              <li>
+                  5
+                </li>
+      </ul>
+
+    </div>
+  </div>
+  <script>
+      window.onload=function(){
+        var moveDis=-600;
+        var list = document.getElementById('list');
+        function animate(){
+          console.log(list.style.left);
+          var newLeft = list.style.left + moveDis;
+           //无限滚动判断
+           if (newLeft > -600) {
+                    list.style.left = -3000 + 'px';
+                }
+                if (newLeft < -3000) {
+                    list.style.left = -600 + 'px';
+                }
+        }
+
+         function play() {
+                //重复执行的定时器
+                timer = setInterval(function() {
+                  animate(-600);
+                }, 2000)
+            }
+           /*  play(); */
+      }
+  </script>
+  
+</body>
+</html>

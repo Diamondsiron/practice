@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="echarts.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="main" style="width: 600px;height:100px;"></div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var labelTop =  {//上层样式
+                normal : {
+                    color :'#0099cc',
+                    label : {
+                        show : true,
+                        position : 'center',
+                        formatter : '1',
+                        textStyle: {
+                            baseline : 'bottom'
+                        }
+                    },
+                    labelLine : {
+                        show : false
+                    }
+                }
+            };
+  var labelFromatter = {//环内样式
+    normal : {//默认样式
+        label : {//标签
+            show : true,
+            formatter : function (){return 90 + '%'},
+            // labelLine.length：30,  //线长，从外边缘起计算，可为负值
+            textStyle: {//标签文本样式
+                color:'black',
+                align :'center',
+                baseline : 'top'//垂直对其方式
+            }
+        }
+    },
+  };
+  var labelBottom = {//底层样式
+      normal : {
+          color: '#99ccff',
+          label : {
+              show : true,
+              position : 'center'
+          },
+          labelLine : {
+              show : false
+          }
+      }
+      
+  };
+
+    // 指定图表的配置项和数据
+    option = {
+      title : {
+                text: "主",
+                subtext: "复",     
+                    x:'center',
+                   /*  y:'center', */
+                    //正标题样式
+                    textStyle: {
+                          fontSize:24,
+                          fontFamily:'Arial',
+                          fontWeight:100,
+                          //color:'#1a4eb0',
+                    },
+                    //副标题样式
+                    subtextStyle: {
+                          fontSize:18,
+                          fontFamily:'Arial',
+                          color:"#1a4eb0",  
+                        },
+        },
+    tooltip: {
+      trigger: 'axis',
+            //show: true,   //default true
+            showDelay: 0,
+            hideDelay: 50,
+            transitionDuration:0,
+            borderRadius : 8,
+            borderWidth: 2,
+            padding: 10,  
+    },
+   /*  animationDuration: function (idx) {
+        // 越往后的数据延迟越大
+        return idx * 1000;
+    }, */
+    series: [
+        {
+           
+            type:'pie',
+            radius: ['50%', '70%'],
+            x: '0%',
+            /* label: {
+                normal: {
+                    show: true,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: false,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            animationDelay: function (idx) {
+                return idx * 100;
+            }, */
+            /* animationEasing: 'elasticOut', */
+           /*  animationDelayUpdate: function (idx) {
+                return idx * 5000;
+            }, */
+           /*  itemStyle:labelTop, */
+            data:[
+                {value:900, name:'已完成'},
+                {value:100, name:'未完成'},
+                
+            ]
+        }
+    ]
+}
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script> 
+</body>
+</html>

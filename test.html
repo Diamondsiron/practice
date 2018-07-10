@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+
+<style>
+  div{
+    background-color: pink;
+    display: flex;		/* 设置为弹性布局 */
+  }
+  p{
+    background-color: blue;
+    margin-right: 20px;
+  }
+  p.one{
+    flex:1 0 auto;		/* 定义放大缩小比例，子元素本来大小 */
+    order:0;			/* 定义子元素排列顺序 */
+  }
+  p.two{
+    flex:2 1 auto;
+    order:2;
+  }
+  p.three{
+    flex:3 1 auto;
+    order:1;
+  }
+  p.four{
+    flex:4 1 auto;
+    order:3;
+  }
+</style>
+</head>
+<body>
+<div>
+  <p class="one">1</p>
+  <p class="two">2</p>
+  <p class="three">3</p>
+  <p class="four">4</p>
+</div>
+</body>
+</html>

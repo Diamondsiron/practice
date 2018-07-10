@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>图片懒加载</title>
+</head>
+
+<style>
+    img {
+        display: block;
+        height: 1000px;
+    }
+</style>
+
+<body>
+<div>
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/3.png" alt="图片">
+    <img src="" data-src="img/5.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    <img src="" data-src="img/1.png" alt="图片">
+    
+
+</div>
+</body>
+<script type="text/javascript">
+
+        var imgs = document.querySelectorAll('img');
+
+        //offsetTop是元素与offsetParent的距离，循环获取直到页面顶部
+        function getTop(e) {
+            var T = e.offsetTop;
+            while(e = e.offsetParent) {
+                T += e.offsetTop;
+            }
+            return T;
+        }
+
+        function lazyLoad(imgs) {
+            var H = window.innerHeight;
+            var S = document.documentElement.scrollTop || document.body.scrollTop;
+            for (var i = 0; i < imgs.length; i++) {
+                if (H + S > getTop(imgs[i])) {
+                    imgs[i].src = imgs[i].getAttribute('data-src');
+                }
+            }
+        }
+
+        window.onload = window.onscroll = function () {
+            lazyLoad(imgs);
+        }
+
+
+//    var imgs = document.body.querySelectorAll('img'),
+//        H = window.innerHeight;  //浏览器视窗高度
+//    function lazyload() {
+//        var S = document.documentElement.scrollTop || document.body.scrollTop;   //滚动条滚过高度
+//        [].forEach.call(imgs, function (img) {
+//            if (!img.getAttribute('data-src')) {
+//                return
+//            }  //已经替换过的跳过
+//            if (H + S - 200 > getTop(img)) {    //为达到演示效果，这里H+S减去200，延后加载时机
+//                img.src = img.getAttribute("data-src");
+//                img.removeAttribute("data-src");
+//            }
+//        });
+//        [].every.call(imgs, function (img) {
+//            return !img.getAttribute('data-src')
+//        }) && (window.removeEventListener("scroll", lazyload, false));   //完成所有替换后注销事件
+//
+//    }
+//
+//    window.addEventListener("scroll", lazyload, false);
+//    window.addEventListener("load", lazyload, false);
+//
+//    function getTop(e) {
+//        var T = e.offsetTop;
+//        while (e = e.offsetParent) {
+//            T += e.offsetTop
+//        }
+//        return T
+//    }
+
+
+</script>
+</html>
+

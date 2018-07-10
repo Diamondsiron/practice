@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/modal.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="show">打开模态框</div>
+  <div class="modal" id="modal">
+    <div class="modal-wrapper">
+      <div class="modal-container">
+        <p id="close">关闭</p>
+        123
+        <div id="choose" style="background-color: green">边款</div>
+      </div>
+
+    </div>
+
+  </div>
+  <script>
+    var a =document.getElementById("close");
+    document.getElementById("close").addEventListener("click", function(){
+        document.getElementById("modal").style.display='none';
+    });
+    document.getElementById("show").addEventListener("click", function(){
+        document.getElementById("modal").style.display='flex';
+    });
+    document.getElementById("choose").addEventListener("click",function(){
+      document.getElementById("choose").style.transform = "translateX(20px)"
+     // document.getElementById("choose").style.transform="rotate(-45deg)"
+      document.getElementById("choose").style.transition="all 1s";
+    })
+  </script>
+</body>
+
+</html>

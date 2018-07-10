@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>每日优鲜</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+ <!--  <link rel="stylesheet" href="css/style.css"> -->
+  <style>
+    h1, h2 {
+      font-weight: normal;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+    a {
+      color: #42b983;
+    }
+    footer{
+        position: fixed;
+            z-index: 9999;
+        display: flex;
+        bottom: 0px;
+        height: 60px;
+        width: 100%;
+        background-color: #fafafa;
+    }
+    .item{
+          float: left;  
+      width: 360px;
+      height: 200px;
+      /* -webkit-transform: translateX(-100%);
+                transform: translateX(-100%); */
+    }
+     html,body {
+      position:relative;
+      height:100%;
+    }
+    html {
+      overflow:hidden;
+    }
+    * {
+      padding:0;
+      margin:0;
+    }
+    li {
+      list-style:none;
+    }
+    body {
+      background:#fff;
+      font-family:Helvetica Neue,Helvetica,Arial,sans-serif;
+      font-size:12px;
+    }
+    .img img {
+      width:100%;
+      display:block;
+    }
+    #top {
+      position:absolute;
+      top:0;
+      z-index:5;
+      width:100%;
+      background:#fff;
+    }
+    #top .addr {
+      height:36px;
+      margin:0 auto;
+      display:block;
+    }
+    #top .search {
+      position:absolute;
+      top:0;
+      right:0;
+      height:36px;
+      display:block;
+    }
+    #nav {
+      border-bottom:1px solid #ebebeb;
+    }
+    #nav .swiper-slide span {
+      margin:0 5px;
+      text-align:center;
+      display:block;
+      line-height:2.5;
+      font-size:14px;
+      color:#333333;
+    }
+    #nav .bar {
+      width:50px;
+      height:3px;
+      position:absolute;
+      bottom:0px;
+    }
+    #nav .bar .color {
+      width:36px;
+      margin:0 auto;
+      height:3px;
+      background:#ff4891;
+    }
+    .banner img {
+      width:100%;
+      display:block;
+    }
+    .banner	.swiper-pagination {
+      left:auto;
+      right:7px;
+      bottom:7px;
+      width:auto;
+      padding:2px 7px;
+      border-radius:10px;
+      color:#fff;
+      background:rgba(0,0,0,.3);
+    }
+    #page {
+      margin-bottom:50px;
+      height:100%;
+    }
+    #page .slidepage {
+      height:100%;
+    }
+    .scroll {
+      height:100%;
+    }
+    .slidescroll {
+      height:auto;
+    }
+    #footer {
+      position:fixed;
+      bottom:0;
+      z-index:5;
+    }
+    .choose{
+      color:rgba(255,72,145,1);
+    }
+    .detail-content{
+        margin: 10px;
+       
+        height: 90%;
+        background-color: #e9e3e3;
+        border-radius: 4px;
+    }
+    .detail{
+        padding: 5px;
+        display: inline-block;
+        width: 40%;
+        height: 200px;
+    }
+    .detail-content-image{
+        height:70%;
+        width: 100%;
+        background-color: #d6b9b9;
+        border-radius: 4px;
+    }
+    .detail-content-desc{
+         height:30%;
+        width: 100%;
+        background-color:#f3e4e4;
+        border-radius: 4px;
+    }
+    .show-detail{
+          height: 90%;
+        /* width: 100%; */
+        background-color: #e5c8c8;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+    }
+    .goodDetail{
+        height: 50px;
+        display: block;
+        background-color: #fff;
+        margin: 3px;
+    }
+    </style>
+</head>
+<body>
+<div id=example>
+  <div class="hello">
+    <header>商城</header>
+    <div class="swiper-container" id="banner">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-color:#fff;height:200px" v-for="item in showList" :key="item">
+          <div class="show-detail">
+            {{item}}
+          </div>  
+        </div>
+      
+      </div>
+    </div>
+     <div class="swiper-container swiper-container-horizontal swiper-container-free-mode swiper-container-android" id="header">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-slide-active" style="width: 60px;" v-for="item in goodList" :key="item">
+          <span class="goodDetail">{{item}}</span>
+        </div>
+      
+        
+      </div>
+  </div>
+    <div class="swiper-container swiper-container-horizontal swiper-container-free-mode swiper-container-android" id="nav">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-slide-active" style="width: 60px;" v-for="(item,index) in typeList" :key="index">
+          <span style="" :class="{choose:index==1}">{{item}}</span></div>
+       <div class="bar" style="width: 60px; transition-duration: 300ms;">
+          <div class="color"></div>
+        </div>
+      </div>
+  </div>
+    <div class="swiper-container" id="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-color:#fff;height:800px" v-for="(item,index) in typeList" :key="index"> 
+         <ul>
+           <li class="detail"  v-for="(item,index) in goodDetail" :key="index">
+              <div class="detail-content">
+                <div class="detail-content-image">
+                  图片
+                </div>
+                <div class="detail-content-desc">
+                     {{item.name}}
+                </div>
+               
+              </div> 
+            </li>
+         </ul>
+        </div>
+       
+       
+      </div>
+    </div>
+ 
+    <footer >
+      <div style="flex:1">
+        首页
+      </div>
+       <div style="flex:1">
+        产品
+      </div>
+       <div style="flex:1">
+        商城
+      </div>
+       <div style="flex:1">
+        账户
+      </div>
+    </footer>
+  </div>
+</div>
+  
+<!-- <script src="js/swiper.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>  
+<script>
+  var vm = new Vue({
+  // 选项
+  el: '#example',
+  created() {
+    this.dragState = {};
+  },
+  data () {
+    return {
+      showList:["展示1","展示2","展示3","展示4","展示5","展示6","展示7"],
+      goodList:["商品1","商品2","商品3","商品4","商品5","商品6","商品7"],
+      typeList:["精选","新品","美妆","家具","餐厨","礼物","零食"],
+      goodDetail:[
+        {
+          name:"产品1",
+          desc:"描述",
+          image:""
+        },
+        {
+          name:"产品2",
+          desc:"描述",
+          image:""
+        },
+        {
+          name:"产品3",
+          desc:"描述",
+          image:""
+        },
+        {
+          name:"产品4",
+          desc:"描述",
+          image:""
+        },
+        {
+          name:"产品5",
+          desc:"描述",
+          image:""
+        },
+        {
+          name:"产品6",
+          desc:"描述",
+          image:""
+        },
+        {
+          name:"产品7",
+          desc:"描述",
+          image:""
+        },
+        ],
+      msg: 'Welcome to Your Vue.js App',
+      list:["首页","产品","商城","账户"],
+      animating: false,
+      dragging: false,
+      userScrolling: false,
+      timer: null,
+      index: 0,
+      prevent: {
+        type: Boolean,
+        default: false
+      },
+      continuous: {
+        type: Boolean,
+        default: true
+      },
+      stopPropagation: {
+        type: Boolean,
+        default: false
+      }
+    }
+  },
+  methods:{
+    
+    init(){
+       var swiper = new Swiper('#banner');
+       var swiper = new Swiper('#header',{
+          slidesPerView: 6,
+        freeMode: true,
+       });
+      var barwidth = 36 //导航粉色条的长度px
+      var tSpeed = 300 //切换速度300ms
+      var bar
+      var navSum
+      var clientWidth
+      var navSlideWidth
+       let activeSlidePosition 
+       var activeIndex
+       var navWidth
+      var navSwiper = new Swiper('#nav', {
+        slidesPerView: 6,
+        freeMode: true,
+        on: {
+          init: function() {
+            navSlideWidth = this.slides.eq(0).css('width');//导航字数需要统一,每个导航宽度一致
+            
+            bar = this.$el.find('.bar')
+            bar.css('width', navSlideWidth)
+            bar.transition(tSpeed)
+            navSum = this.slides[this.slides.length - 1].offsetLeft //最后一个slide的位置
+
+            clientWidth = parseInt(this.$wrapperEl.css('width')) //Nav的可视宽度
+            navWidth = 0
+            for (let i = 0; i < this.slides.length; i++) {
+              navWidth += parseInt(this.slides.eq(i).css('width'))
+            }
+
+            var topBar = this.$el.parents('body').find('#top') //页头
+
+          },
+
+        },
+      });
+      var mySwiper = new Swiper('#swiper-container', {
+        //autoplay: true,//可选选项，自动滑动
+        watchSlidesProgress: true,
+      	resistanceRatio: 0,
+         on:{
+              init:function(){
+                //console.log("this",this)
+              },
+              touchMove: function() {
+                var progress = this.progress
+                bar.transition(0)
+                //console.log("动画",navSum,progress)
+                bar.transform('translateX(' + navSum * progress + 'px)')
+                //粉色255,72,145灰色51,51,51
+                for (let i = 0; i < this.slides.length; i++) {
+                  let slideProgress = this.slides[i].progress
+                  if (Math.abs(slideProgress) < 1) {
+                   let r = Math.floor((255 - 51) * (1 - Math.pow(Math.abs(slideProgress), 2)) + 51)
+                   let g = Math.floor((72 - 51) * (1 - Math.pow(Math.abs(slideProgress), 2)) + 51)
+                   let b = Math.floor((145 - 51) * (1 - Math.pow(Math.abs(slideProgress), 2)) + 51)
+                    navSwiper.slides.eq(i).find('span').css('color', 'rgba(' + r + ',' + g + ',' + b + ',1)')
+                  }
+                }
+              },
+              transitionStart: function() {
+                activeIndex = this.activeIndex
+                activeSlidePosition = navSwiper.slides[activeIndex].offsetLeft
+                //释放时导航粉色条移动过渡
+                bar.transition(tSpeed)
+                // console.log("transitionStart",activeSlidePosition)
+                bar.transform('translateX(' + activeSlidePosition + 'px)')
+                //释放时文字变色过渡
+                navSwiper.slides.eq(activeIndex).find('span').transition(tSpeed)
+                navSwiper.slides.eq(activeIndex).find('span').css('color', 'rgba(255,72,145,1)')
+                if (activeIndex > 0) {
+                  navSwiper.slides.eq(activeIndex - 1).find('span').transition(tSpeed)
+                  navSwiper.slides.eq(activeIndex - 1).find('span').css('color', 'rgba(51,51,51,1)')
+                }
+                if (activeIndex < this.slides.length) {
+                  navSwiper.slides.eq(activeIndex + 1).find('span').transition(tSpeed)
+                  navSwiper.slides.eq(activeIndex + 1).find('span').css('color', 'rgba(51,51,51,1)')
+                }
+                //导航居中
+                let navActiveSlideLeft = navSwiper.slides[activeIndex].offsetLeft //activeSlide距左边的距离
+
+                navSwiper.setTransition(tSpeed)
+                if (navActiveSlideLeft < (clientWidth - parseInt(navSlideWidth)) / 2) {
+                  navSwiper.setTranslate(0)
+                } else if (navActiveSlideLeft > navWidth - (parseInt(navSlideWidth) + clientWidth) / 2) {
+                  navSwiper.setTranslate(clientWidth - navWidth)
+                } else {
+                  navSwiper.setTranslate((clientWidth - parseInt(navSlideWidth)) / 2 - navActiveSlideLeft)
+                }
+
+              },
+          }
+      })
+
+       navSwiper.$el.on('touchstart', function(e) {
+          e.preventDefault() //去掉按压阴影
+        })
+        navSwiper.on('tap', function(e) {
+
+          let clickIndex = this.clickedIndex
+          let clickSlide = this.slides.eq(clickIndex)
+          mySwiper.slideTo(clickIndex, 0);
+          this.slides.find('span').css('color', 'rgba(51,51,51,1)');
+          clickSlide.find('span').css('color', 'rgba(255,72,145,1)');
+        })
+
+   
+    }
+  },
+  mounted() {
+    this.init()
+   
+  },
+})
+</script>
+</body>
+</html>

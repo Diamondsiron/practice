@@ -1,0 +1,32 @@
+
+.contianer{
+	padding: 0 25px;
+	word-break: break-all; word-wrap:break-word;
+}
+.hero{
+	display: flex;
+	padding: 10px 10px 10px 10px;
+	background-color: yellow;
+	overflow: hidden;
+}
+.hero_one{
+	flex:1;
+	background-color: red;
+	margin-right: 15px;
+	text-align: center;
+	display: inline-block;
+}
+.hero_two{
+	flex:1;
+	background-color: red;
+	margin-right: 15px;
+	text-align: center;
+	display: inline-block;
+}
+.hero_three{
+	flex:1;
+	background-color: red;
+	
+	text-align: center;
+	display: inline-block;
+}

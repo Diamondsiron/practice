@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+  <style>
+    li{
+      margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    list-style: none;
+    width: 10px;
+    float: left;
+    border-right: 1px solid #666;
+    height: 20px;
+    }
+  </style>
+  <div style="
+  overflow: none;
+  width: 100%;
+  height: 200px;
+">
+  <ul id="rulerScroller" style="position: absolute;
+  top: 30px;">
+    <li>开始</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+    <li>13</li>
+    <li>14</li>
+    <li>15</li>
+    <li>16</li>
+    <li>17</li>
+    <li>18</li>
+    <li>19</li>
+    <li>20</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>2</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>结尾</li>
+  </ul>
+</div>
+<script>
+    var x= -1
+  $("#rulerScroller").on('touchstart',function(e){
+    var touch = e.originalEvent.targetTouches[0];
+    x=-1 ;
+           console.log("0")
+        })
+  $("#rulerScroller").on('touchmove',function(e){
+    var touch = e.originalEvent.targetTouches[0];
+    var xx = touch.pageX;
+   console.log(xx);
+    var lf=$("#rulerScroller").position().left;
+    if(lf>8||lf<-500){
+      return
+    }
+    var xx = touch.pageX;
+    if(x==-1){
+      x=xx;
+    }      
+    var distance = parseInt((x-xx)*1.0);
+  
+    $("#rulerScroller").css("left",lf-distance);
+     
+  })
+  $("#rulerScroller").on('touchend',function(e){
+    var touch = e.originalEvent.targetTouches[0];
+      console.log("2")
+  })
+
+</script>
+  
+</body>
+</html>
