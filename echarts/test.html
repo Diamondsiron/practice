@@ -8,7 +8,7 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="main" style="width: 600px;height:400px;"></div>
+  <div id="main" style="width: 1200px;height:800px;"></div>
   <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
@@ -110,7 +110,7 @@ function getPieChartOption(a,b,c,d,e,aSla,fSla,sSla,graphStyleA,graphStyleB,grap
 return pieChartOption;
 }
     // 使用刚指定的配置项和数据显示图表。
-    var pieChartOtion = getPieChartOption(1,2,3,4,5,10,10,10,"labelTop","labelTop","labelTop","labelTop","labelTop","${title2}","${title1}"); 
+    var pieChartOtion = getPieChartOption(5,2,3,4,5,10,10,10,"labelTop","labelTop","labelTop","labelTop","labelTop","${title2}","${title1}"); 
     myChart.setOption(pieChartOtion);
 </script> 
 </body>

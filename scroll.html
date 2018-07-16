@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no"/>
+  <script src="./js/bscroll.min.js"></script>
+  <title>Document</title>
+</head>
+<style>
+ /*  #scroller {
+      display: block;
+  }
+  #wrapper {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      padding: 0px;
+      margin: 0px;
+  } */
+  .wrapper{
+    width: 100%;
+    position:absolute;
+    top: 45px;
+    bottom: 50px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .content{
+    height:100%;
+  }
+  li{
+    list-style: none;
+    height: 400px;
+    padding: 0px;
+    margin: 0px;
+  }
+ /*  #scroller{
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition-duration: 500ms;
+    transform: translate(0px, 0px) translateZ(0px);
+  } */
+</style>
+<body>
+    <div class="wrapper">
+        <div class="content">
+        <ul>
+          <li id="li1">Pretty row 1</li>
+          <li id="li2">Pretty row 2</li>
+          <li id="li3">Pretty row 3</li>
+          <li id="li4">Pretty row 4</li>
+          <li id="li5">Pretty row 5</li>
+          <li id="li6">Pretty row 6</li>
+          <li id="li7">Pretty row 7</li>
+          <li id="li8">Pretty row 8</li>
+        </ul>
+    </div>
+  </div>
+  <script>
+     var scroll
+    function init(){
+      scroll = new BScroll(document.querySelector(".content"), {
+        probeType: 3
+      });
+      scroll.on('scroll', function (pos) {
+        console.log(Math.round(pos.y));
+        if(Math.round(pos.y)<-500){
+         document.getElementById("li1").style.display="none";
+         console.log("消失")
+        }
+      });
+    }
+    init();
+    setTimeout(function(){
+    //document.getElementById("scroller").style.transform= 'translate(0px, -300px) translateZ(0px)';
+    //init();
+   // scroll.scrollTo(0, -200);
+    },2000)
+   /*  document.getElementById("wrapper").addEventListener() */
+  </script>
+</body>
+</html>
