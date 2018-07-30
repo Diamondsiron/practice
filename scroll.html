@@ -31,6 +31,18 @@
   .content{
     height:100%;
   }
+  .wrappers{
+  
+    overflow: hidden;
+   
+  }
+  .content{
+    height:100%;
+  }
+  .contents{
+    height: 600px;
+    background-color: red
+  }
   li{
     list-style: none;
     height: 400px;
@@ -48,13 +60,18 @@
         <div class="content">
         <ul>
           <li id="li1">Pretty row 1</li>
-          <li id="li2">Pretty row 2</li>
-          <li id="li3">Pretty row 3</li>
+          <li id="li2" class="wrappers">
+            <div  class="contents">
+             <div style="height: 300px;background: yellow"></div>
+             <div style="height: 300px;background: blue"></div>
+            </div>
+          </li>
+         <!--  <li id="li3">Pretty row 3</li>
           <li id="li4">Pretty row 4</li>
           <li id="li5">Pretty row 5</li>
           <li id="li6">Pretty row 6</li>
           <li id="li7">Pretty row 7</li>
-          <li id="li8">Pretty row 8</li>
+          <li id="li8">Pretty row 8</li> -->
         </ul>
     </div>
   </div>
@@ -66,19 +83,21 @@
       });
       scroll.on('scroll', function (pos) {
         console.log(Math.round(pos.y));
-        if(Math.round(pos.y)<-500){
+       /*  if(Math.round(pos.y)<-500){
          document.getElementById("li1").style.display="none";
          console.log("消失")
-        }
+        } */
+      });
+    }
+    var scrolls
+    function ints(){
+      scrolls = new BScroll(document.querySelector(".wrappers"), {
+        probeType: 3
       });
     }
     init();
-    setTimeout(function(){
-    //document.getElementById("scroller").style.transform= 'translate(0px, -300px) translateZ(0px)';
-    //init();
-   // scroll.scrollTo(0, -200);
-    },2000)
-   /*  document.getElementById("wrapper").addEventListener() */
+    ints();
+   
   </script>
 </body>
 </html>

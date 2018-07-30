@@ -1,0 +1,70 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8">
+   <title>手风琴demo</title> 
+   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="description" content="Fengqin_Demo">
+     
+     <style>
+
+    .accordion {
+        position: relative;
+        width: 100px;
+    }
+    
+    .accordion input {
+        display: none;
+    }
+    
+    .accordion .sub-content{
+        overflow: hidden;
+        height: 0px;
+        transition: height 0.4s ease-in-out;
+        background-color: #F5F5F5;
+    }
+    
+    .accordion input:checked~.sub-content {
+        height: 140px;
+    }
+</style>
+
+
+    </head> 
+    <body>
+        <section class="accordion">
+            <div>
+                <input id="ac-1" name="ac-radio" type="radio" onclick="doAccordion(this)">
+                <label for="ac-1">Item Title</label>
+                <div class="sub-content">
+                    <div>sub content</div>
+                    <div>sub content</div>
+                    <div>sub content</div>
+                </div>
+            </div>
+           <!--  <div>
+                <input id="ac-2" name="ac-radio" type="radio" onclick="doAccordion(this)">
+                <label for="ac-2">Item Title</label>
+                <div class="sub-content">
+                    <div>sub content</div>
+                    <div>sub content</div>
+                    <div>sub content</div>
+                    <div>sub content</div>
+                    <div>sub content</div>
+                    <div>sub content</div>
+                </div>
+            </div> -->
+        </section>
+        <div>123</div>
+        </body> 
+
+ <script>
+var openSubContent = self.parentNode.querySelector(".sub-content")
+openSubContent.style.height = openSubContent.scrollHeight+"px";
+var allSubContent = document.querySelector(".accordion")
+    .querySelectorAll(".sub-content");
+var i = 0;
+while(i < allSubContent.length) {
+    allSubContent[i].style.height = 0;
+    i++;
+}
+
+</script>
+               </html>

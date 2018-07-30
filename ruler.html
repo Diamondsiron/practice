@@ -121,6 +121,27 @@
     <li>结尾</li>
   </ul>
 </div>
+<style>
+  .box {
+  position: relative;
+  min-width: 15em;
+  max-width: 15em;
+  min-height: 10em;
+  outline: 2px solid;
+  overflow: hidden;
+  background: blue;
+}
+.box:before {
+    content: '';
+    position: absolute;
+    padding: 2rem;
+    box-shadow: 0 0 0 300px red;
+    background: #95a;
+    margin: -2rem;
+    border-radius: 50%;
+  }
+</style>
+<div class="box"></div>
 <script>
     var x= -1
   $("#rulerScroller").on('touchstart',function(e){
