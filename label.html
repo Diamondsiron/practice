@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>mock-placeholder</title>
+    <style type="text/css">
+    .u-text{position: relative;width:200px; height:20px;}
+    .u-text label{position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);}
+    </style>
+</head>
+<body>
+    <div id="u-text" class="u-text">
+        <input id="user" type="text" style="width:200px; height:20px;">
+        <label id="int" style="color:#aaa;-webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;">请输入</label>
+    </div>
+    <script type="text/javascript">
+    var uText = document.getElementById('u-text');
+    var uLabel = document.getElementById('int');
+    var user = document.getElementById('user');
+    function dispear (e) {
+     
+        uLabel.style.display = 'none';
+    }
+    function apear (e) {
+    
+        if(user.value == '')
+            uLabel.style.display = 'block';
+    }
+    user.addEventListener('input',dispear,false);
+    user.addEventListener('blur',apear,false)
+    uLabel.addEventListener("click",function(){
+      document.getElementById("user").focus();
+    })
+    </script>
+</body>
+</html>

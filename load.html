@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .load-container{padding:20px 0;text-align:center;}
+
+.load-container .loader{display:inline-block;font-size:30px;text-indent:-9999em;overflow:hidden;width:1em;height:1em;border-radius:50%;margin:0.8em auto;position:relative;-webkit-animation:load 1.7s infinite ease;animation:load 2s infinite ease;}
+@-webkit-keyframes load{
+   0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);box-shadow:-0.11em -0.83em 0 -0.4em #d4eaf4,-0.11em -0.83em 0 -0.42em #d4eaf4,-0.11em -0.83em 0 -0.44em #d4eaf4,-0.11em -0.83em 0 -0.46em #d4eaf4,-0.11em -0.83em 0 -0.477em #d4eaf4;}
+   5%,
+   95%{box-shadow:-0.11em -0.83em 0 -0.4em #a4dbf4,-0.11em -0.83em 0 -0.42em #a4dbf4,-0.11em -0.83em 0 -0.44em #a4dbf4,-0.11em -0.83em 0 -0.46em #a4dbf4,-0.11em -0.83em 0 -0.477em #a4dbf4;}
+   30%{box-shadow:-0.11em -0.83em 0 -0.4em #5bc5f4,-0.51em -0.66em 0 -0.42em #5bc5f4,-0.75em -0.36em 0 -0.44em #5bc5f4,-0.83em -0.03em 0 -0.46em #5bc5f4,-0.81em 0.21em 0 -0.477em #5bc5f4;}
+   55%{box-shadow:-0.11em -0.83em 0 -0.4em #2ab6f4,-0.29em -0.78em 0 -0.42em #2ab6f4,-0.43em -0.72em 0 -0.44em #2ab6f4,-0.52em -0.65em 0 -0.46em #2ab6f4,-0.57em -0.61em 0 -0.477em #2ab6f4;}
+   100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);box-shadow:-0.11em -0.83em 0 -0.4em #0fa4f6,-0.11em -0.83em 0 -0.42em #0fa4f6,-0.11em -0.83em 0 -0.44em #0fa4f6,-0.11em -0.83em 0 -0.46em #0fa4f6,-0.11em -0.83em 0 -0.477em #0fa4f6;}
+}
+@keyframes load{
+   0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);box-shadow:-0.11em -0.83em 0 -0.4em #d4eaf4,-0.11em -0.83em 0 -0.42em #d4eaf4,-0.11em -0.83em 0 -0.44em #d4eaf4,-0.11em -0.83em 0 -0.46em #d4eaf4,-0.11em -0.83em 0 -0.477em #d4eaf4;}
+   5%,
+   95%{box-shadow:-0.11em -0.83em 0 -0.4em #a4dbf4,-0.11em -0.83em 0 -0.42em #a4dbf4,-0.11em -0.83em 0 -0.44em #a4dbf4,-0.11em -0.83em 0 -0.46em #a4dbf4,-0.11em -0.83em 0 -0.477em #a4dbf4;}
+   30%{box-shadow:-0.11em -0.83em 0 -0.4em #5bc5f4,-0.51em -0.66em 0 -0.42em #5bc5f4,-0.75em -0.36em 0 -0.44em #5bc5f4,-0.83em -0.03em 0 -0.46em #5bc5f4,-0.81em 0.21em 0 -0.477em #5bc5f4;}
+   55%{box-shadow:-0.11em -0.83em 0 -0.4em #2ab6f4,-0.29em -0.78em 0 -0.42em #2ab6f4,-0.43em -0.72em 0 -0.44em #2ab6f4,-0.52em -0.65em 0 -0.46em #2ab6f4,-0.57em -0.61em 0 -0.477em #2ab6f4;}
+   100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);box-shadow:-0.11em -0.83em 0 -0.4em #0fa4f6,-0.11em -0.83em 0 -0.42em #0fa4f6,-0.11em -0.83em 0 -0.44em #0fa4f6,-0.11em -0.83em 0 -0.46em #0fa4f6,-0.11em -0.83em 0 -0.477em #0fa4f6;}
+}
+
+
+.pswp__preloader__icn {
+  opacity:0.75;
+  width: 24px;
+  height: 24px;
+  -webkit-animation: clockwise 500ms linear infinite;
+  animation: clockwise 500ms linear infinite;
+}
+ 
+/* The idea of animating inner circle is based on Polymer loading indicator by Keanu Lee https://blog.keanulee.com/2014/10/20/the-tale-of-three-spinners.html */
+.pswp__preloader__cut {
+  position: relative;
+  width: 12px;
+  height: 24px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+ 
+.pswp__preloader__donut {
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #000;
+   border-radius: 50%;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: none;
+  margin:0;
+   -webkit-animation: donut-rotate 1000ms cubic-bezier(.4,0,.22,1) infinite;
+  animation: donut-rotate 1000ms cubic-bezier(.4,0,.22,1) infinite;
+}
+ 
+@-webkit-keyframes clockwise {
+  0% { -webkit-transform: rotate(0deg) }
+  100% { -webkit-transform: rotate(360deg) }
+}
+@keyframes clockwise {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
+@-webkit-keyframes donut-rotate {
+  0% { -webkit-transform: rotate(0) }
+  50% { -webkit-transform: rotate(-140deg) }
+  100% { -webkit-transform: rotate(0) }
+}
+@keyframes donut-rotate {
+  0% { transform: rotate(0) }
+  50% { transform: rotate(-140deg) }
+  100% { transform: rotate(0) }
+}
+  </style>
+</head>
+<body>
+    <div class="load-container">
+        <div class="loader"></div>
+       
+     </div>
+     <div class="pswp__preloader__icn">
+        <div class="pswp__preloader__cut">
+          <div class="pswp__preloader__donut"></div>
+        </div>
+      </div>
+</body>
+</html>
