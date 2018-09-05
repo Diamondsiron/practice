@@ -23,6 +23,9 @@ div div { height:30px; line-height:30px; text-align:center; background-color:#FC
     from { -webkit-transform:scaleY(1); }
     to { -webkit-transform:scaleY(0); }
 }
+.xxx:active{
+  color: red;
+}
 </style>
 <div>
   <div id="a">下拉 </div>
@@ -40,6 +43,38 @@ div div { height:30px; line-height:30px; text-align:center; background-color:#FC
       <li>第三个</li>
   </ul>
 </div>
+<div class="xxx">111111</div> 
+<p>点击复制后在右边textarea CTRL+V看一下</p>
+<input type="text" id="inputText" value="测试文本"/>
+<input type="button" id="btn" value="复制"/>
+<textarea rows="4"></textarea>
+<script type="text/javascript">
+    var btn = document.getElementById('btn');
+    btn.addEventListener('click', function(){
+        var inputText = document.getElementById('inputText');
+        var currentFocus = document.activeElement;
+        inputText.focus();
+        inputText.setSelectionRange(0, inputText.value.length);
+        document.execCommand('copy', true);
+        currentFocus.focus();
+    });
+</script>
+<script type="text/javascript">
+  function copyUrl2()
+      {
+          var Url2=document.getElementById("biao1").innerText;
+          var oInput = document.createElement('input');
+          oInput.value = Url2;
+          document.body.appendChild(oInput);
+          oInput.select(); // 选择对象
+          document.execCommand("Copy"); // 执行浏览器复制命令
+          oInput.className = 'oInput';
+          oInput.style.display='none';
+         
+      }
+  </script>
+  <div cols="20" id="biao1">12345678</div>
+  <input type="button" onClick="copyUrl2()" value="点击复制代码" />
 <script>
   document.getElementById("a").addEventListener("click",function(){
     if(document.getElementById("b").className=='b'){

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./js/flexbale.js"></script>
+  <script src="./js/vue.js"></script>
+  <link rel="stylesheet" href="./css/flexbale.css">
+</head>
+<body>
+
+  <div id="main">
+  
+  
+  
+    <header>
+      <div class="head-content" >
+        <div class="head-content-item"  v-on:click="changeCurrent(1)" :class={"head-content-item_choose":choose==1}>
+          账户管理
+        </div>
+        <div class="head-content-item"  v-on:click="changeCurrent(2)" :class={"head-content-item_choose":choose==2}>
+          资金管理
+        </div>
+        <div class="head-content-item"  v-on:click="changeCurrent(3)" :class={"head-content-item_choose":choose==3}>
+          我要出借
+        </div>
+        <div class="head-content-item"  v-on:click="changeCurrent(4)" :class={"head-content-item_choose":choose==4}>
+          服务介绍
+        </div>
+      </div>
+    </header>
+    <div id="choose1" v-if="choose==1">
+      <div class="content">
+        <div class="context-basic">
+          <div class="context-title"><p>如何注册</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'desc1','desc2')">
+            <div class="context-message-desc-title-l">1、如何进行注册？</div>
+            <div class="context-message-desc-title-r" id="desc2"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="desc1">
+            <div class="h66">
+            </div>
+            <p>第一步，在注册页面根据提示正确填写注册信息，然后点击获取验证码。</p>
+            <p>第二步，输入短信验证码，然后点击【注册】即可</p>
+            <p>第三部，注册成功，可前往开通银行存管账户</p>
+          </div>
+        </div>
+        <div class="context-basic">
+          <div class="context-title"><p>存管开户</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc3','desc4')">
+            <div class="context-message-desc-title-l">1、如何开通银行存管账户？</div>
+            <div class="context-message-desc-title-r" id="desc4"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc3">
+            <div class="h66">
+            </div>
+            <p>第一步，直接点击银行存管开户提示中的【立即开通】按钮；或点击【个人中心】-【账户安全】-【银行存管账户】，进入银行存管账户开户页面。存管开户时需输入真实姓名、身份证号、银行卡号（限储蓄卡）。</p>
+            <p>第二步，根据提示完成银行存管账户开户操作。</p>
+            <p>第三步，开户完成后可设置交易密码/去充值。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc5','desc6')">
+            <div class="context-message-desc-title-l">2、如何绑定银行卡？</div>
+            <div class="context-message-desc-title-r" id="desc6"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc5">
+            <div class="h66">
+            </div>
+            <p>在开户页面输入银行卡号即可绑卡成功。绑定的银行卡可以进行充值及提现。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc7','desc8')">
+            <div class="context-message-desc-title-l">3、是否可以解绑/更换银行卡？</div>
+            <div class="context-message-desc-title-r" id="desc8"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc7">
+            <div class="h66">
+            </div>
+            <p>账户可用户余额为0且无债权关系时，可解绑/更换银行卡。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc9','desc10')">
+            <div class="context-message-desc-title-l">4、如何解绑/更换银行卡？</div>
+            <div class="context-message-desc-title-r" id="desc10"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="desc9">
+            <div class="h66">
+            </div>
+            <p>第一步，点击【个人中心】-【账户安全】-【我的银行卡】，进入银行卡管理页面。</p>
+            <p>第二步，点击【解绑】，根据提示解除银行卡绑定。</p>
+            <p>第三步，重新输入新银行卡信息进行绑定，即可完成更换银行卡。</p>
+          </div>
+        </div>
+        <div class="context-basic">
+          <div class="context-title"><p>密码管理</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc" >
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc11','desc12')">
+            <div class="context-message-desc-title-l">1、如何修改登录密码？</div>
+            <div class="context-message-desc-title-r" id="desc12"><img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc11">
+            <div class="h66">
+            </div>
+            <p>第一步，点击【个人中心】-【账户安全】-【登录密码】，进入修改密码页面。</p>
+            <p>第二步，根据页面提示正确填写当前密码和新密码，然后点击【确认】即可。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc13','desc14')">
+            <div class="context-message-desc-title-l">2、如何找回登录密码？</div>
+            <div class="context-message-desc-title-r" id="desc14"><img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc13">
+            <div class="h66">
+            </div>
+            <p>第一步，在登录页面点击【忘记密码】，进入忘记密码找回页面。</p>
+            <p>第二步，根据页面提示填写用户名/手机号和验证码，然后点击【下一步】即可。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc15','desc16')">
+            <div class="context-message-desc-title-l">3、如何设置银行存管账户交易密码？</div>
+            <div class="context-message-desc-title-r" id="desc16"><img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc15">
+            <div class="h66">
+            </div>
+            <p>第一步，点击【个人中心】-【账户安全】-【存管账户交易密码】，进入交易密码设置页面。</p>
+            <p>第二步，根据页面提示正确填写信息即可。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc17','desc18')">
+            <div class="context-message-desc-title-l">4、如何重置银行存管账户交易密码？</div>
+            <div class="context-message-desc-title-r" id="desc18"><img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc17">
+            <div class="h66">
+            </div>
+            <p>第一步，点击【个人中心】-【账户安全】-【存管账户交易密码】，进入修改交易密码页面。</p>
+            <p>第二步，根据页面提示填写验证码，然后点击【确认】进入存管账户交易密码重置页面。</p>
+            <p>第三步，根据页面提示正确填写信息即可。</p>
+          </div>
+        </div>
+        <div class="context-basic">
+          <div class="context-title"><p>认证手机</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc19','desc20')">
+            <div class="context-message-desc-title-l">1、如何修改手机号？</div>
+            <div class="context-message-desc-title-r" id="desc20"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc19">
+            <div class="h66">
+            </div>
+            <p>第一步，点击【个人中心】-【账户安全】-【手机认证】，进入手机认证页面。</p>
+            <p>第二步，通过原手机验证码进行更改，按步骤操作即可完成手机号的更改。</p>
+          </div>
+        </div>
+        <div class="context-basic">
+          <div class="context-title"><p>嘉金币</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc21','desc22')">
+            <div class="context-message-desc-title-l">1、嘉金币是什么？</div>
+            <div class="context-message-desc-title-r" id="desc22"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="desc21">
+            <div class="h66">
+            </div>
+            <p>嘉金币是嘉e贷平台通过出借、签到、活动参与、会员奖励等形式发放给用户，用户可在激活后兑换现金的一种奖励措施。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc23','desc24')">
+            <div class="context-message-desc-title-l">2、嘉金币的获取方式有哪些？</div>
+            <div class="context-message-desc-title-r" id="desc24"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc23">
+            <div class="h66">
+            </div>
+            <p>嘉金币主要可通过在活动期内参与出借获得，也可通过参与嘉金币赠送、签到、会员活动等方式获取。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc25','desc26')">
+            <div class="context-message-desc-title-l">3、嘉金币如何使用？</div>
+            <div class="context-message-desc-title-r" id="desc26"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc25">
+            <div class="h66">
+            </div>
+            <p>嘉金币可通过在活动期内参与出借来激活，已激活的嘉金币可通过【兑换现金】功能直接兑换为现金。已激活嘉金币与人民币面值比例为50:1。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc27','desc28')">
+            <div class="context-message-desc-title-l">4、如何查询我的嘉金币？</div>
+            <div class="context-message-desc-title-r" id="desc28"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="desc27">
+            <div class="h66">
+            </div>
+            <p>点击【个人中心】-【我的奖励】，可查看嘉金币相关信息。</p>
+          </div>
+        </div>
+        <div class="context-basic">
+          <div class="context-title"><p>红包</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc29','desc30')">
+            <div class="context-message-desc-title-l">1、红包是什么？</div>
+            <div class="context-message-desc-title-r" id="desc30"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="desc29">
+            <div class="h66">
+            </div>
+            <p>红包是嘉e贷平台通过活动、会员奖励等形式发放给用户，用户可在打开后直接享受的一种现金奖励措施。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc31','desc32')">
+            <div class="context-message-desc-title-l">2、红包的获取方式有哪些？</div>
+            <div class="context-message-desc-title-r" id="desc32"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="desc31">
+            <div class="h66">
+            </div>
+            <p>红包主要可通过在嘉e贷官方网站及APP参与出借获得，也可通过参与邀请好友、会员活动等方式获取。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc33','desc34')">
+            <div class="context-message-desc-title-l">3、红包如何使用？</div>
+            <div class="context-message-desc-title-r" id="desc34"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="desc33">
+            <div class="h66">
+            </div>
+            <p>红包可以通过【打开红包】功能直接兑换为现金。红包与人民币面值比例为1:1。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc35','desc36')">
+            <div class="context-message-desc-title-l">4、如何查询我的红包？</div>
+            <div class="context-message-desc-title-r" id="desc36"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc35">
+            <div class="h66">
+            </div>
+            <p>点击【个人中心】-【我的奖励】，可查看红包相关信息。</p>
+          </div>
+        </div>
+        <div class="context-basic">
+          <div class="context-title"><p>邀请好友</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc37','desc38')">
+            <div class="context-message-desc-title-l">1、邀请好友的方式有哪些？</div>
+            <div class="context-message-desc-title-r" id="desc38"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="desc37">
+            <div class="h66">
+            </div>
+            <p>1）PC网页</p>
+            <p>点击【个人中心】-【邀请好友】，复制专属邀请链接并通过QQ、微信、微博等社交软件分享给好友。</p>
+            <p>2）APP客户端</p>
+            <p>点击【我的】-【我的二维码】，将二维码分享给好友或请好友扫一扫二维码。</p>
+            <p>3）直接邀请</p>
+            <p>请好友在注册页面直接填写您的手机号码作为推荐码即可。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc39','desc40')">
+            <div class="context-message-desc-title-l">2、如何查询我成功邀请的好友有哪些？</div>
+            <div class="context-message-desc-title-r" id="desc40"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc39">
+            <div class="h66">
+            </div>
+            <p>1）PC网页</p>
+            <p>点击【个人中心】-【邀请好友】，可查看到“邀请记录”。</p>
+            <p>2）APP客户端</p>
+            <p>点击【我的】-【邀请好友】，可查看到“邀请记录”。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom" @click="handleOpen($event,'desc41','desc42')">
+            <div class="context-message-desc-title-l">3、邀请好友的奖励规则及奖励发放形式是怎样的？</div>
+            <div class="context-message-desc-title-r" id="desc42"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="desc41">
+            <div class="h66">
+            </div>
+            <p>1）用户邀请好友注册成功后一年内，受邀用户参与嘉e优选服务出借成功，邀请用户可获得好友年化出借金额1%的现金红包奖励。</p>
+            <p>2）受邀用户所参加的嘉e优选服务出借成功后，奖励将通过现金红包形式发送，获得金额可提现或用于继续出借。</p>
+            <p>3）受邀用户所参加的嘉e优选服务如为“不参与平台活动”类，邀请用户不获得邀友奖励。</p>
+            <p>4）受邀用户成功注册满一年后的出借将不再计入奖励基数。</p>
+          </div>
+        </div>
+      </div>
+      <footer>
+  
+      </footer>
+    </div>
+    <div id="choose2" v-if="choose==2">
+      <div class="content">
+        <div class="context-basic">
+          <div class="context-title"><p>费用</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital1','capital2')">
+            <div class="context-message-desc-title-l">1、平台费用有哪些？</div>
+            <div class="context-message-desc-title-r" id="capital2"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="capital1">
+            <div class="h66">
+            </div>
+            <p>1）充值</p>
+            <p>为回馈广大用户长期以来的支持与信任，目前用户充值暂不收取任何手续费。</p>
+            <p>2）提现</p>
+            <p>提现手续费：1元/笔。</p>
+            <p>3）出借相关费用</p>
+            <p>加入费用（咨询服务费）：</p>
+            <p>收费范围：嘉e优选</p>
+            <p>收费规则：出借金额的0%，期初额外收取。</p>
+            <p>账户管理费：</p>
+            <p>收费范围：嘉e优选、精选散标、散标转让</p>
+            <p>收费规则：单笔标的利息的5%，借款人还款时收取。（优惠期，暂不收取）</p>
+            <p>债权转让服务费：</p>
+            <p>收费范围：散标转让</p>
+            <p>收费规则：散标债权转让金额的0.3%，最低1元/笔，在债权转让成交时由转让人支付。详情参见《债权转让》。（优惠期，暂不收取）</p>
+            <p>提前解约违约金：</p>
+            <p>收费范围：嘉e优选</p>
+            <p>收费规则：解约时用户所持债权本金的5%，锁定期内用户申请解约时收取。（注：此费率会根据活动或市场情况变化， 详见相关服务介绍或平台官方公告。）</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital3','capital4')">
+            <div class="context-message-desc-title-l">2、如何查看账户管理费收取多少？</div>
+            <div class="context-message-desc-title-r" id="capital4"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="capital3">
+            <div class="h66">
+            </div>
+            <p>点击【个人中心】-【出借中心】，出借记录中会显示账户管理费金额。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital5','capital6')">
+            <div class="context-message-desc-title-l">3、如何查看提现手续费收取多少？</div>
+            <div class="context-message-desc-title-r" id="capital6"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="capital5">
+            <div class="h66">
+            </div>
+            <p>在提现页面申请提现时，页面将显示本次提现的提现手续费金额。</p>
+          </div>
+        </div>
+        <div class="context-basic">
+          <div class="context-title"><p>充值</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital7','capital8')">
+            <div class="context-message-desc-title-l">1、如何充值？</div>
+            <div class="context-message-desc-title-r" id="capital8"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="capital7">
+            <div class="h66">
+            </div>
+            <p>第一步，点击【个人中心】-【充值】按钮，进入充值页面。</p>
+            <p>第二步，选择充值方式（快捷支付、银行转账），并按照提示完成充值即可。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital9','capital10')">
+            <div class="context-message-desc-title-l">2、充值方式有哪些？</div>
+            <div class="context-message-desc-title-r" id="capital10"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="capital9">
+            <div class="h66">
+            </div>
+            <p>1）快捷充值</p>
+            <p>2）银行转账（需使用本人账户已绑定的银行卡进行转账）</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital11','capital12')">
+            <div class="context-message-desc-title-l">3、充值什么时候到账？</div>
+            <div class="context-message-desc-title-r" id="capital12"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="capital11">
+            <div class="h66">
+            </div>
+            <p>快捷充值一般实时到账，根据双方银行处理时间，可能会有几分钟延迟。银行转账非实时到账，请耐心等待。</p>
+          </div>
+        </div>
+        <div class="context-basic">
+          <div class="context-title"><p>提现</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital13','capital14')">
+            <div class="context-message-desc-title-l">1、如何提现？</div>
+            <div class="context-message-desc-title-r" id="capital14"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="capital13">
+            <div class="h66">
+            </div>
+            <p>第一步，点击【个人中心】-【提现】按钮，进入提现页面。</p>
+            <p>第二步，填写提现金额，确认提现手续费，然后点击【确认提现】按钮。</p>
+            <p>第三步，在银行提现页面输入交易密码即可完成提现。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital15','capital16')">
+            <div class="context-message-desc-title-l">2、提现是否收取费用？</div>
+            <div class="context-message-desc-title-r" id="capital16"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="capital15">
+            <div class="h66">
+            </div>
+            <p>提现手续费：1元/笔。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital17','capital18')">
+            <div class="context-message-desc-title-l">3、提现金额是否有限制？</div>
+            <div class="context-message-desc-title-r" id="capital18"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="capital17">
+            <div class="h66">
+            </div>
+            <p>快速提现单笔限额5万元，大额提现单笔限额50万元，每日最多可提现10次。</p>
+            <div class="h66">
+            </div>
+          </div>
+        </div>
+        <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital19','capital20')">
+          <div class="context-message-desc-title-l">4、提现处理时间和实际到账时间各为多久？</div>
+          <div class="context-message-desc-title-r" id="capital20"><img src="./image/fx_4.png" alt=""> </div>
+        </div>
+        <div  class="context-message-desc-context" id="capital19">
+          <div class="h66">
+          </div>
+          <p>提现时间：7×24小时。快速提现2小时左右到账，大额提现T+1工作日到账。节假日可能出现延迟。</p>
+          <p>依据发卡行不同可能略有差异，具体到账时间以银行为准。</p>
+          <div class="h66">
+          </div>
+        </div>
+        <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'capital21','capital22')">
+          <div class="context-message-desc-title-l">5、延迟/锁定提现的原因？</div>
+          <div class="context-message-desc-title-r" id="capital22"> <img src="./image/fx_4.png" alt=""></div>
+        </div>
+        <div  class="context-message-desc-context" id="capital21">
+          <div class="h66">
+          </div>
+          <p>1）在您进行出借时，由于所出借款项需银行进行结算，故您选择出借后，有2个小时提现的冻结期，在此期间为保证您的正常出借，不可以进行提现操作，但并不影响您的充值业务以及其他出借操作。</p>
+          <p>2）嘉e优选锁定期内，经由用户确认，系统会将归属于出借人的回款进行再次出借。在再次出借的期间，会产生银行结算，故有2个小时的冻结期。在此期间不可以进行提现操作，但并不影响您的充值业务以及其他出借操作。</p>
+        </div>
+      </div>
+  
+    </div>
+    <div id="choose3" v-if="choose==3">
+      <div  class="content">
+        <div class="context-basic">
+          <div class="context-title"><p>如何出借</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'lend1','lend2')">
+            <div class="context-message-desc-title-l">1、平台各类服务、产品的发布时间是几点？</div>
+            <div class="context-message-desc-title-r" id="lend2">
+              <img src="./image/fx_4.png" alt="">
+            </div>
+          </div>
+          <div  class="context-message-desc-context" id="lend1">
+            <div class="h66">
+            </div>
+            <p>发布时间为早9:00，结束时间为20:00。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'lend3','lend4')">
+            <div class="context-message-desc-title-l">2、如何参加嘉e优选服务？</div>
+            <div class="context-message-desc-title-r" id="lend4">
+              <img src="./image/fx_4.png" alt="">
+            </div>
+          </div>
+          <div  class="context-message-desc-context" id="lend3">
+            <div class="h66">
+            </div>
+            <p>第一步，注册嘉e贷账户。</p>
+            <p>第二步，点击【个人中心】-【账户安全】，进行银行存管开户。</p>
+            <p>第三步，选择您满意的服务，点击【立即出借】。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'lend5','lend6')">
+            <div class="context-message-desc-title-l"> 3、如何出借精选散标？</div>
+            <div class="context-message-desc-title-r" id="lend6">
+              <img src="./image/fx_4.png" alt="">
+            </div>
+          </div>
+          <div  class="context-message-desc-context" id="lend5">
+            <div class="h66">
+            </div>
+            <p>第一步，注册嘉e贷账户。</p>
+            <p>第二步，点击【个人中心】-【账户安全】，进行银行存管开户。</p>
+            <p>第三步，选择您满意的散标，点击【立即出借】。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'lend7','lend8')">
+            <div class="context-message-desc-title-l"> 4、如何查看出借记录？</div>
+            <div class="context-message-desc-title-r" id="lend8">
+              <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="lend7">
+            <div class="h66">
+            </div>
+            <p>点击【个人中心】-【出借中心】，即可查看出借记录。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'lend9','len10')">
+            <div class="context-message-desc-title-l"> 5、利息从什么时候开始计算？</div>
+            <div class="context-message-desc-title-r" id="len10"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="lend9">
+            <div class="h66">
+            </div>
+            <p>嘉e优选是在资金成功出借后开始计息的，精选散标是在满标复审通过后开始计息的。</p>
+            <p>注：1、参加嘉e优选的用户资金成功出借的日期，通常为加入成功后的1-2天内，最多不超过3个自然日。此期间，您的资金将被冻结。3个自然日内未被成功出借的资金将会解除冻结，由用户自行支配。</p>
+            <p>2、参加嘉e优选的用户在出借时，由于所选标的不同，某一笔资金的起息时间为该笔资金被划拨给借款人的时间。由于不同的借款人满标、款项支付的时间存在差异，出借人的各笔资金开始计息的时间也会有所不同。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'lend11','lend12')">
+            <div class="context-message-desc-title-l">6、平台各类服务、产品的募集期限是多长？</div>
+            <div class="context-message-desc-title-r" id="lend12"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="lend11">
+            <div class="h66">
+            </div>
+            <p>募集期限为3个工作日。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-if="choose==4">
+      <div class="conent">
+        <div class="context-basic">
+          <div class="context-title"><p>嘉e优选</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve1','serve2')">
+            <div class="context-message-desc-title-l">1、嘉e优选服务是什么？</div>
+            <div class="context-message-desc-title-r" id="serve2"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="serve1">
+            <div class="h66">
+            </div>
+            <p>嘉e优选服务是由嘉e贷平台为用户推荐符合其风险承受能力且经过平台严格筛选的优质标的，在用户确认后出借给相应借款人，最终达成撮合的一项中介服务。</p>
+            <p>在锁定期内，经由用户确认，系统会将归属于出借人的回款出借给新的借款人直至锁定期满，由此降低出借风险并最大化的资金使用效率。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve3','serve4')">
+            <div class="context-message-desc-title-l">2、嘉e优选服务的期待年回报率有多少？</div>
+            <div class="context-message-desc-title-r" id="serve4"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="serve3">
+            <div class="h66">
+            </div>
+            <p>根据锁定期期限不同，各服务的期待年回报率不同。</p>
+            <p>期待年回报率为借款协议约定的基础年化利率与出借人参加嘉e优选服务的奖励利率之和。锁定期限越长，出借奖励利率越高。</p>
+            <p>期待年回报率会根据平台活动及实际运营情况灵活调整，当期服务的期待年回报率可在嘉e贷官网及APP端查看。期待年回报率不代表对实际利息回报的承诺，出借人需自行承担资金出借的风险与责任；市场有风险，出借需谨慎。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve5','serve6')">
+            <div class="context-message-desc-title-l">3、嘉e优选服务如何收费？</div>
+            <div class="context-message-desc-title-r" id="serve6"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="serve5">
+            <div class="h66">
+            </div>
+            <p>加入费用（咨询服务费）：出借金额的0%，期初额外收取。</p>
+            <p>账户管理费：单笔标的利息的5%，借款人还款时收取。（优惠期，暂不收取）</p>
+            <p>提前解约违约金：解约时用户所持债权本金的5%，锁定期内用户申请解约时收取。（注：此费率会根据活动或市场情况变化， 详见相关服务介绍或平台官方公告。）</p>
+          </div>
+        </div>
+        <div class="context-basic">
+          <div class="context-title"><p>精选散标</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve7','serve8')">
+            <div class="context-message-desc-title-l">1、车辆抵押借款标是什么？</div>
+            <div class="context-message-desc-title-r" id="serve8"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="serve7">
+            <div class="h66">
+            </div>
+            <p>车辆抵押借款标由嘉e贷平台专业车辆评估师及征信人员上门调查其车辆信息及个人信用资料，所有资料提交信审部门进行银行级别的严格审核，并根据车辆价值及个人还款能力确定借款额度，在办理相关手续后，代理用户在嘉e贷平台发布的借款标。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve9','serve10')">
+            <div class="context-message-desc-title-l">2、信用借款标是什么？</div>
+            <div class="context-message-desc-title-r" id="serve10"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="serve9">
+            <div class="h66">
+            </div>
+            <p>信用借款标是嘉e贷平台经过大数据分析、多重渠道交叉验证，对借款用户的个人信用资质进行银行级别的严格审核，并根据审核结果确定其信用额度后，代理用户在嘉e贷平台发布的借款标。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve11','serve12')">
+            <div class="context-message-desc-title-l">3、精选散标的收益有多少？</div>
+            <div class="context-message-desc-title-r" id="serve12"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="serve11">
+            <div class="h66">
+            </div>
+            <p>精选散标的年利率区间7%-24%，具体收益取决于您所选择的借款标的利率。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve13','serve14')">
+            <div class="context-message-desc-title-l">4、对散标进行出借的期限有多久？</div>
+            <div class="context-message-desc-title-r" id="serve14"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="serve13">
+            <div class="h66">
+            </div>
+            <p>3-36个月，具体期限取决于您所选择的借款标的的借款期限。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve15','serve16')">
+            <div class="context-message-desc-title-l">5、是否可以提前收回出借的本金？</div>
+            <div class="context-message-desc-title-r" id="serve16"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="serve15">
+            <div class="h66">
+            </div>
+            <p>可以，精选散标出借完成并持有90天后，您可申请转让提前收回出借的资金。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve17','serve18')">
+            <div class="context-message-desc-title-l">6、精选散标如何收费？</div>
+            <div class="context-message-desc-title-r" id="serve18"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="serve17">
+            <div class="h66">
+            </div>
+            <p>账户管理费：单笔标的利息的5%，借款人还款时收取。（优惠期，暂不收取） 注：如您在债权持有期间发起转让，需支付债权转让服务费。详情参见《债权转让》。（优惠期，暂不收取）</p>
+          </div>
+        </div>
+        <div class="context-basic">
+          <div class="context-title"><p>散标转让</p></div>
+          <div class="context-line"></div>
+        </div>
+        <div class="context-message-desc">
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve19','serve20')">
+            <div class="context-message-desc-title-l">1、	什么是散标转让？</div>
+            <div class="context-message-desc-title-r" id="serve20"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="serve19">
+            <div class="h66">
+            </div>
+            <p>指散标债权持有人通过嘉e贷散标转让功能将债权挂出且与债权受让人签订债权转让及受让协议，将所持有的债权转让给债权受让人的操作。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve21','serve22')">
+            <div class="context-message-desc-title-l">2、	如何发起转让？</div>
+            <div class="context-message-desc-title-r" id="serve22"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="serve21">
+            <div class="h66">
+            </div>
+            <p>第一步，登录嘉e贷账户，点击【个人中心】-【出借中心】-【散标债权】，并点击【发起转让】按钮，进入散标债权转让信息确认页面。</p>
+            <p>第二步，确认转让信息并点击【确认】，跳转到江西银行交易密码校验页面。</p>
+            <p>第三步，输入交易密码，点击【确定】，发起转让成功。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve23','serve24')">
+            <div class="context-message-desc-title-l">3、	如何承接转让债权？</div>
+            <div class="context-message-desc-title-r" id="serve24"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="serve23">
+            <div class="h66">
+            </div>
+            <p>第一步，注册嘉e贷账户。</p>
+            <p>第二步，点击【个人中心】-【账户安全】，进行银行存管开户。</p>
+            <p>第三步，选择您满意的转让债权，点击【立即承接】。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve25','serve26')">
+            <div class="context-message-desc-title-l">4、	散标转让的条件及注意事项有哪些？</div>
+            <div class="context-message-desc-title-r" id="serve26"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="serve25">
+            <div class="h66">
+            </div>
+            <p>1）	债权持有90天（含90天）以上方可发起转让。</p>
+            <p>2）	距当期还款日3日内（含3日）的债权，不能发起转让。</p>
+            <p>3）  要转让的债权须为正常还款状态，已逾期或当期收到还款的债权不能进行转让。</p>
+            <p>4）  要转让的债权须为单笔全部债权，并且剩余本金大于或等于100元。</p>
+            <p>5）	转让一旦发起，不可手动撤销。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve27','serve28')">
+            <div class="context-message-desc-title-l">5、散标转让如何收费？</div>
+            <div class="context-message-desc-title-r" id="serve28"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="serve27">
+            <div class="h66">
+            </div>
+            <p>散标债权转让金额的0.3%，最低1元/笔，在债权转让成交时由转让人支付。</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve29','serve30')">
+            <div class="context-message-desc-title-l">6、如何计算散标债权转让金额？</div>
+            <div class="context-message-desc-title-r" id="serve30"> <img src="./image/fx_4.png" alt=""></div>
+          </div>
+          <div  class="context-message-desc-context" id="serve29">
+            <div class="h66">
+            </div>
+            <p>散标债权转让金额=剩余本金+当期应收利息</p>
+            <p>剩余本金：指该笔债权剩余全部未还本金</p>
+            <p>当期应收利息：指该笔债权截止至债权转让发起日应收的利息</p>
+            <div class="h66">
+            </div>
+          </div>
+          <div class="context-message-desc-title context-message-desc-title_bottom"  @click="handleOpen($event,'serve31','serve32')">
+            <div class="context-message-desc-title-l">7、承接转让的债权收益如何？</div>
+            <div class="context-message-desc-title-r" id="serve32"><img src="./image/fx_4.png" alt=""> </div>
+          </div>
+          <div  class="context-message-desc-context" id="serve31">
+            <div class="h66">
+            </div>
+            <p>转让债权和原始债权的年利率、还款方式是一样的。</p>
+            <p>注：普通债权相比，承接转让债权没有等待其他用户投标、等待放款等环节，可以尽快完成出借。</p>
+            <p>并且，承接转让债权后，债权转让人当期应收但未收的债权收益，将全部由债权受让人接收。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    //document.documentElement.style.fontSize = document.documentElement.clientWidth / 1242*100 + 'px';
+    var vm = new Vue({
+      el:"#main",
+      data(){
+        return{
+          choose:1
+        }
+      },
+      methods:{
+        handleOpen(e,id,next) {
+          var vms = this;
+          var openSubContent = document.querySelector("#"+id);
+          var desc3 = document.querySelector("#"+next);
+          if(openSubContent.style.height==""){
+            openSubContent.style.height = openSubContent.scrollHeight+"px";
+            desc3.style.transform="rotate(180deg)"
+            return
+          }
+          else if(openSubContent.style.height!=="0px"){
+            openSubContent.style.height = "0px";
+            desc3.style.transform="rotate(0deg)"
+            return
+          }else{
+            openSubContent.style.height = openSubContent.scrollHeight+"px";
+            desc3.style.transform="rotate(180deg)"
+            return
+          }
+        },
+        changeCurrent(value){
+          this.choose = value;
+  
+        },
+        init(){
+          window.onload = function () {
+            var s = "";
+            s += " window.screen.availHeight："+ window.screen.availHeight+"\n";
+            s +="document.documentElement.clientHeight:"+document.documentElement.clientHeight+"\n";
+            s += " window.document.body.offsetHeight："+ window.document.body.offsetHeight + " (包括边线的宽)"+"\n";
+            s += " window.screen.height："+ window.screen.height+"\n";
+            s += " window.document.body.offsetHeight "+ window.document.body.offsetHeight +"\n";
+            s +="document.querySelector(#main).offsetHeight"+document.querySelector("#main").offsetHeight +"\n";
+            s +="main"+document.getElementById("main").offsetHeight +"\n";
+            s +="xx"+document.getElementById("xx").offsetHeight +"\n";
+            document.getElementById("xxxxx").innerHTML=s
+          }
+        }
+  
+      },
+      mounted() {
+        //this.init();
+        this.$nextTick(function () {
+          //this.init();
+        });
+  
+      }
+    })
+  </script>
+  </body>
+  </html>

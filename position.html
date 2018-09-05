@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  html, body {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    /* height: 100%; */
+    background-color: #f2f2f2;
+}</style>
+</head>
+<body>
+  <div style="height: 200px;background-color: yellow;">
+  <div style="position:absolute;bottom:  0px;width: 10px;height: 10px;background-color: red"></div>
+  </div>
+  <div id="xxxxx"></div>
+  <script>
+  var s = "";
+	s +="window.screen.availWidth："+window.screen.availWidth+"\n";
+	s += " window.screen.availHeight："+ window.screen.availHeight+"\n";
+	s +="document.documentElement.clientHeight:"+document.documentElement.clientHeight+"\n";
+	s += " window.document.body.offsetHeight："+ window.document.body.offsetHeight + " (包括边线的宽)"+"\n";
+	s += " window.document.body.offsetWidth："+ window.document.body.offsetWidth+"\n";
+	s += " window.screen.width ："+ window.screen.width +"\n";
+	s += " window.screen.height："+ window.screen.height+"\n";
+	s += " window.document.body.offsetHeight "+ window.document.body.offsetHeight +"\n";
+	document.getElementById("xxxxx").innerHTML=s
+  </script>
+</body>
+</html>
