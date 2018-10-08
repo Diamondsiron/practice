@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./js/under.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //_.each([1, 2, 3], console.log);
+   // _.map([1, 2, 3], function(num){ return num * 3; });
+    function Pet(words){
+        this.words = words;
+        this.speak = function () {
+            console.log( this.words)
+        }
+    }
+    function Dog(words){
+        //Pet.call(this, words); //结果： Wang
+       Pet.apply(this, arguments); //结果： Wang
+    }
+    var dog = new Dog('Wang');
+    dog.speak();
+  </script>
+</body>
+</html>
