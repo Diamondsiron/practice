@@ -65,7 +65,56 @@
     }
     //add(1)(2,3) //6
     add(1)(2)(3)(4)(5) //15
-   
+    snail = function(array) {
+  // enjoy
+  var result;
+  while (array.length) {
+    // Steal the first row.
+    result = (result ? result.concat(array.shift()) : array.shift());
+    // Steal the right items.
+    for (var i = 0; i < array.length; i++)
+      result.push(array[i].pop());
+    // Steal the bottom row.
+    result = result.concat((array.pop() || []).reverse());
+    // Steal the left items.
+    for (var i = array.length - 1; i >= 0; i--)
+      result.push(array[i].shift());
+  }
+  return result;
+}
+array = [[1,2,3],
+         [8,9,4],
+         [7,6,5]]
+snail(array)
+function scramble(str1, str2) {
+let arry1 = str1.split("");
+let arry2 = str2.split("");
+let length = str2.split("").length;
+let reuslt = [];
+for(let i = 0; i < arry1.length; i++){
+
+  for(let j = 0; j < arry2.length; j++){
+    if(arry1[i]==arry2[j]){
+    
+      
+      reuslt.push(arry2[j])
+      arry2.splice(j);
+    
+    }
+  
+  
+  }
+
+}
+if(length==reuslt.length){
+  return true
+}else{
+
+  return false
+}
+ //code me
+}
+scramble('rkqodlw','world')
   </script>
 </body>
 </html>
