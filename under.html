@@ -21,7 +21,7 @@
         //Pet.call(this, words); //结果： Wang
        Pet.apply(this, arguments); //结果： Wang
     }
-    var dog = new Dog('Wang');
+    var dog = new Dog('Wang');   
     dog.speak();
 
     var currying = function(fn) {
