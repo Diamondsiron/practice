@@ -16,7 +16,21 @@
                 });
 }
 var a = "abc";
-rot13(a);
+//rot13(a);
+//工厂模式
+function createObj1(name,age){
+  var a = new Object();
+  a.name=name;
+  a.age = age;
+  return a;
+}
+var obj = createObj1("name","age")
+//函数模式
+function createObj2(name,age){
+  this.name = name;
+  this.age = age;
+}
+var obj = new createObj1("name","age")
   </script>
 </body>
 </html>
