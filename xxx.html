@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="js/bscroll.min.js"></script>
+  <title>Document</title>
+  <style>
+  .loadWrapper{
+  z-index: 100;
+
+  -moz-user-select:none;/*火狐*/
+
+  -webkit-user-select:none;/*webkit浏览器*/
+
+  -ms-user-select:none;/*IE10*/
+
+  -khtml-user-select:none;/*早期浏览器*/
+
+  user-select:none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+}
+.loading{
+  z-index: 100;
+  position: absolute;
+  /* text-align: center; */
+  width: 100px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+</style>
+</head>
+<body>
+  <div class="loadCenter loadWrapper" style="display: block;" id="loadingMain">
+		<div class="borrowX" style="    width: 8rem;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);">
+    <div>
+			<table  style="margin: 0 auto;
+  background-color: #ffffff;
+  color: #989898;
+  font-size: 0.42rem;
+  text-align: center;
+  border-collapse: collapse;">
+				<tr style="height:1rem">
+					<td style="width: 4rem"><div style="width: 4rem">资金运转情况</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div>  </td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+				</tr>
+				<tr style="height:1rem">
+					<td style="width: 4rem"><div style="width: 4rem">经营状况及财务状况</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div>  </td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+				</tr>
+				<tr style="height:1rem">
+					<td><div style="width: 4rem">还款能力变化情况</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div>  </td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+				</tr>
+				<tr style="height:1rem">
+					<td style="width: 4rem"><div style="width: 4rem">逾期情况</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div>  </td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+				</tr>
+        <tr style="height:1rem">
+					<td style="width: 4rem"><div style="width: 4rem">涉诉情况</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div>  </td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+				</tr>
+        <tr style="height:1rem">
+					<td><div style="width: 4rem">受行政处罚情况</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div>  </td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+          <td style="width: 4rem" ><div style="width: 4rem">1</div></td>
+				</tr>
+
+      </table>
+    </div>
+		</div>
+  </div>
+  <script>
+  document.documentElement.style.fontSize = document.documentElement.clientWidth / 1242*100 + 'px';
+  var scroll = new window.BScroll(document.querySelector(".borrowX"), {
+					probeType: 2,
+					click:true,
+					scrollX:true,
+					
+					momentum:false,
+					pullUpLoad: true ,
+				});
+  </script>
+</body>
+</html>
