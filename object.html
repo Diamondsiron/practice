@@ -38,7 +38,19 @@ function creatObj3(){
 creatObj3.prototype.name = "name";
 creatObj3.prototype.age = "age";
 var obj = new creatObj3();
-
+function Person(){
+  Person.prototype.name="name";
+  Person.prototype.age="age";
+  Person.prototype.job="job";
+}
+var person1 = new Person();
+var person2 = new Person();
+console.log(person1.name==person2.name)
+console.log(Person.prototype.isPrototypeOf(person1))
+Object.getPrototypeOf(person1)==Person.prototype
+person1.hasOwnProperty("name")//false 来自原型
+person1.name="person"
+person1.hasOwnProperty("name")//true 来自实例
   </script>
 </body>
 </html>
