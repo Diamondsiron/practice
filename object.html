@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="./js/under.js"></script>
+  <!-- <script src="./js/under.js"></script> -->
+ <!--  <script src="./js/underTest.js"></script> -->
   <title>Document</title>
 </head>
 <body>
@@ -52,7 +53,41 @@ Object.getPrototypeOf(person1)==Person.prototype
 person1.hasOwnProperty("name")//false 来自原型
 person1.name="person"
 person1.hasOwnProperty("name");//true 来自实例
+(function() {
 
+  
+var root = typeof self == 'object' && self.self === self && self ||
+          typeof global == 'object' && global.global === global && global ||
+          this ||
+          {};
+
+
+//root就是window
+var _ = function(obj) {
+  if (obj instanceof _) return obj;
+  if (!(this instanceof _)) return new _(obj);
+  this._wrapped = obj;
+};
+root._ = _;
+_.abc = function(){
+  console.log("abc")
+}
+
+
+
+_.prototype.value = function() {
+  return this._wrapped;
+};
+
+
+_.prototype.valueOf = _.prototype.toJSON = _.prototype.value;
+
+_.prototype.toString = function() {
+  return String(this._wrapped);
+};
+
+
+}());
 
 
   </script>
