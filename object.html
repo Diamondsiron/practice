@@ -89,7 +89,85 @@ _.prototype.toString = function() {
 
 }());
 
+var Vector = function (components) {
+  let result = [...components];
+  // TODO: Finish the Vector class.
+  this.add=function(array){
+    if(result.length==array.value.length){
+        let res = []
+        for(let i=0; i<result.length; i++){
+          res.push(result[i]+array.value[i])
+        }
+        let results = [...res]
+        let obj = new Vector(results)
+        return obj
+    }else{
+       let e = "throws an error"
+       //throw new Error(e);
+       return e
+    }
 
+  },
+  this.subtract=function(array){
+     if(result.length==array.value.length){
+        let res = []
+        for(let i=0; i<result.length; i++){
+          res.push(result[i]-array.value[i])
+        }
+        let results = [...res]
+        let obj = new Vector(results)
+        return obj
+    }else{
+       let e = "throws an error"
+        throw new Error(e);
+    }
+  },
+  this.dot=function(array){
+     if(result.length==array.value.length){
+        let res = []
+        for(let i=0; i<result.length; i++){
+          res.push(result[i]*array.value[i])
+        }
+        let results = [...res]
+        
+        
+        return results.reduce((a,item)=>{
+          return item+a
+        })
+    }else{
+        let e = "throws an error"
+        throw new Error(e);
+      
+      
+    }
+  },
+  this.norm=function(array){
+     
+        let res = []
+        for(let i=0; i<result.length; i++){
+          res.push(result[i]^2)
+        }
+        let results = [...res]
+        let obj = results.reduce((a,item)=>{
+          return item+a
+        })
+        return Math.sqrt(obj)
+    
+    
+  },
+  this.toString = function(){
+    return "("+result.join(",")+")"
+  }
+  this.equals =function(obj){
+     let resultss = JSON.parse(JSON.stringify(obj))==JSON.parse(JSON.stringify(this))
+     return resultss
+  } 
+  this.value = result
+  //return result
+};
+var a = new Vector([1, 2, 3]);
+var b = new Vector([3, 4, 5]);
+var c = new Vector([5, 6, 7, 8]);
   </script>
 </body>
 </html>
