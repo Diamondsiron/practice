@@ -19,8 +19,8 @@
     this._wrapped = obj;
   };
   root._ = _;
-  _.prototype.abc = function(){
-    return this._wrapped;
+  _.abc = function(){
+    console.log("abc")
   }
 
   
