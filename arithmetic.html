@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function Stack(){
+        let items = []
+        this.push = function(element) {
+            items.push(element)
+        }
+        this.pop = function() {
+            return items.pop()
+        }
+        this.peek = function() {
+            return items[items.length-1]
+        }
+        this.isEmpty = function() {
+            return items.length == 0
+        }
+        this.size = function() {
+            return items.length
+        }
+        this.clear = function() {
+            items = []
+        }
+        this.print = function() {
+            console.log(items.toString())
+        }
+    }
+    let stack = new Stack();
+    console.log(stack.isEmpty())
+    stack.push(5)
+    stack.push(8)
+    console.log(stack.peek())
+    stack.push(11)
+    console.log(stack.size())
+    console.log(stack.isEmpty())
+    stack.push(15)
+    stack.pop()
+    stack.pop()
+    console.log(stack.size())
+    stack.print()
+    function divideBy2(decNumber) {
+        var remStack = new Stack(),
+        rem,
+        binaryString = '';
+        while (decNumber > 0) {
+            rem = Math.floor(decNumber % 2);
+            remStack.push(rem)
+            decNumber = Math.floor(decNumber / 2)
+        }
+        while (!remStack.isEmpty()) {
+            binaryString += remStack.pop().toString();
+        }
+        return binaryString
+    }
+    console.log(divideBy2(233))
+    console.log(divideBy2(10))
+    console.log(divideBy2(1000))
+    function Queue() {
+        let items = []
+        this.enqueue = function(element) {
+            items.push(element)
+        }
+        this.dequeue = function(){
+            return items.shift()
+        }
+        this.front = function() {
+            return items[0]
+        }
+        this.isEmpty = function() {
+            return items.length == 0
+        }
+        this.size = function() {
+            return items.length;
+        }
+        this.print = function() {
+            console.log(items.toString())
+        }
+
+    }
+    let queue = new Queue();
+    console.log(queue.isEmpty())
+    queue.enqueue('John')
+    queue.enqueue('Jack')
+    queue.enqueue('Camlia')
+    queue.print()
+    queue.dequeue()
+    queue.dequeue()
+    queue.print()
+    function LinkedList() {
+        let Node  = function(element) {
+            this.element = element
+            this.next = null
+        }
+        let length = 0;
+        let head = null
+        this.append = function(element) {
+            let node = new Node(element),
+            current;
+            if (head === null) {
+                head = node
+            } else {
+                current = head;
+
+                while(current.next) {
+                    current = current.next;
+                }
+                current.next = node;
+            }
+            length++
+        }
+        this.insert = function(position, element) {
+            if(position >= 0 && position <= length) {
+                let node = new node(element),
+                current = head,
+                previous,
+                index = 0;
+                
+                if(position === 0) {
+                    node.next = current;
+                    head = node
+                }else {
+                    while(index++ < position){
+                        previous = current;
+                        current = current.next
+                    }
+                    node.next = current;
+                    previous.next = node
+                }
+                length ++
+                return true
+            }else {
+                return false
+            }
+        }
+        this.removeAt = function(position) {
+            if(position > -1 && position < length) {
+                let current = head,
+                previous,
+                index = 0;
+
+                if(position === 0) {
+                    head = current.next
+                }else{
+                    while(index++ < position) {
+                        previous = current;
+                        current = current.next
+                    }
+                    previous.next = current.next
+                }
+                length--;
+                return current.element
+            }else{
+                return null
+            }
+        }
+        this.remove = function(element) {
+            let index = this.indexOf(element)
+            return this.removeAt(index);
+        }
+        this.indexOf = function(element) {
+            let current = head,
+            index = -1;
+            while(current) {
+                if(element == current.element) {
+                    return index
+                }
+                index ++
+                current = current.next
+            }
+            return -1
+        }
+        this.isEmpty = function() {
+            return length === 0
+        }
+        this.size = function() {
+            return length
+        }
+        this.getHead = function() {
+            return head
+        }
+        this.toString = function() {
+            let current = head,
+            string = '';
+            while(current) {
+                string += current.element + (current.next ? 'n' :'');
+                current = current.next;
+            }
+            return string
+        }
+        this.print = function() {
+
+        }
+    }
+
+    let list = new LinkedList();
+    list.append(15)
+    list.append(10)
+    console.log(list.toString())
+
+    function DoublyLinkedList() {
+        let node = function(element) {
+            this.element = element;
+            this.next  = null;
+            this.prev = null
+        }
+        let length = 0;
+        let head = null;
+        let tail = null;
+
+        this.insert = function(position, element) {
+            if(position >= 0 && position <= length) {
+                let node = new node(element),
+                current = head,
+                previous,
+                index = 0;
+                
+                if(position === 0) {
+                    if(!head) {
+                        head = node 
+                        tail = node
+                    }else {
+                        node.next = current;
+                        current.prev = node
+                        head = node
+                    }
+                    
+                }else if(position === length) {
+                    current = tail;
+                    current.next = node;
+                    node.prev = current;
+                    tail = node
+                }else {
+                    while(index++ < position){
+                        previous = current;
+                        current = current.next
+                    }
+                    node.next = current;
+                    previous.next = node
+                    current.prev = node;
+                    node.prev = previous
+                }
+                length ++
+                return true
+            }else {
+                return false
+            }
+        }
+        this.removeAt = function(position) {
+            if(position > -1 && position < length) {
+                let current = head,
+                previous,
+                index = 0;
+
+                if(position === 0) {
+                    head = current.next;
+                    if (length === 1){
+                        tail = null
+                    }else {
+                        head.prev = null
+                    }
+                }else if (position===length-1) {
+                    current = tail;
+                    tail = current.prev
+                    tail.next = null
+                }else{
+                    while(index++ < position) {
+                        previous = current;
+                        current = current.next
+                    }
+                    previous.next = current.next
+                    current.next.prev = previous
+                }
+                length--;
+                return current.element
+            }else{
+                return null
+            }
+        }
+    }
+
+    function Set() {
+        let items = {}
+        this.has = function(value) {
+            //return value in items
+            return items.hasOwnProperty(value)
+        }
+        this.add = function(value) {
+            if (!this.has(value)) {
+                items[value] = value;
+                return true
+            }
+            return false
+        }
+        this.remove = function(value) {
+            if(this.has(value)) {
+                delete items[value]
+                return true
+            }
+            return false
+        }
+        this.clear = function() {
+            items = {}
+        }
+        this.size = function() {
+            return Object.keys(items).length;
+        }
+        this.values = function() {
+            let values = [];
+            for(let key in items) {
+                if(items.hasOwnProperty(key)) {
+                    values.push(items[key])
+                }
+            }
+            return values
+        }
+        this.union = function(otherSet) {
+            let unionSet = new Set();
+            let values = this.values();
+            for(let i = 0; i < values.length; i++) {
+                unionSet.add(values[i])
+            }
+            values = otherSet.values()
+            for (let i = 0; i < values.length; i++) {
+                unionSet.add(values[i])
+            }
+            return unionSet;
+        }
+        this.intersection = function(otherSet) {
+            let intersectionSet = new Set()
+            let values = this.values()
+            for (let i = 0; i < values.length; i++) {
+                if(otherSet.has(values[i])) {
+                    intersectionSet.add(values[i])
+                }
+            }
+            return intersectionSet
+        }
+        this.difference = function(otherSet) {
+            let differenceSet = new Set()
+            let values = this.values;
+            for (let i = 0; i < values.length; i++) {
+                if (!otherSet.has(values[i])) {
+                    differenceSet.add(values[i])
+                }
+            }
+            return differenceSet
+        }
+        this.subset = function(otherSet) {
+            if(this.size() > otherSet.size()){
+                return false
+            } else {
+                let values = this.values()
+                for (let i = 0; i < values.length; i++) {
+                    if (!otherSet.has(values[i])) {
+                        return false
+                    }
+                }
+            }
+            return true
+        }
+
+    }
+    let set = new Set();
+    set.add(1)
+    console.log(set.values()); //输出["1"]
+    console.log(set.has(1)); //输出true
+    console.log(set.size()); //输出1
+    set.add(2);
+    console.log(set.values()); //输出["1", "2"]
+    console.log(set.has(2)); //true
+    console.log(set.size()); //2
+    set.remove(1);
+    console.log(set.values()); //输出["2"]
+    set.remove(2);
+    console.log(set.values()); //输出[]
+    let setA = new Set();
+    setA.add(1);
+    setA.add(2);
+    setA.add(3);
+    let setB = new Set();
+    setB.add(3);
+    setB.add(4);
+    setB.add(5);
+    setB.add(6);
+    let unionAB = setA.union(setB);
+    console.log(unionAB.values());
+    let intersectionAB = setA.intersection(setB);
+    console.log(intersectionAB.values());
+    let differenceAB = setA.difference(setB);
+    console.log(differenceAB.values());
+    console.log(setA.subset(setB));
+    
+    function Dictionary() {
+        let items = {}
+        this.has = function(key) {
+            return key in items
+        }
+        this.set = function(key, value) {
+            items[key] = value
+        }
+        this.delete = function(key) {
+            if (this.has(key)) {
+                delete items[key]
+                return true
+            }
+            return false
+        }
+        this.get = function(key) {
+            return this.has(key) ? items[key] : undefined
+        }
+        this.values = function() {
+            var values = []
+            for(let k in items) {
+                if (this.has(k)) {
+                    values.push(items[k])
+                }
+            }
+            return values
+        }
+        this.keys = function() {
+            return Object.keys(items)
+        }
+        this.getItems = function () {
+            return items
+        }
+    }
+    var dictionary = new Dictionary();
+    dictionary.set('Gandalf', 'gandalf@email.com');
+    dictionary.set('John', 'johnsnow@email.com');
+    dictionary.set('Tyrion', 'tyrion@email.com');
+    dictionary.delete('John');
+
+    function HashTable() {
+        var table = []
+        var loseloseHashCode = function (key) {
+            var hash = 0;
+            for (var i = 0; i < key.length; i++) {
+                hash += key.charCodeAt(i)
+            }
+            return hash % 37
+        }
+        var djb2HashCode = function (key) {
+            var hash = 5381
+            for (var i = 0; i < key.length; i++) {
+                hash = hash * 33 +  key.charCodeAt(i)
+            }
+            return hash % 1013
+        }
+        var ValuePair = function(key, value) {
+            this.key = key;
+            this.value = value
+            this.toString = function() {
+                return '[' + this.key + '-' + this.value + ']'
+            }
+        }
+        this.put = function (key, value) {
+            var position = djb2HashCode(key)
+            if (table[position] == undefined) {
+                table[position] = new ValuePair(key, value)
+            } else {
+                var index = ++position
+                while (table[position] != undefined) {
+                    index ++
+                }
+                table[index] = new ValuePair(key, value)
+            }
+           
+        }
+        this.get = function (key) {
+            var position = djb2HashCode(key)
+            if (table[position] !== undefined) {
+               if (table[position].key === key) {
+                   return table[position].value
+               } else {
+                   var index = ++position
+                   while (table[index] === undefined || table[index].key !== key) {
+                       index ++
+                   }
+                   if (table[index].key == key) {
+                       return table[index].value
+                   }
+               }
+            }
+            return undefined
+        }
+        this.remove = function (key) {
+            var position = djb2HashCode(key)
+            if (table[position] !== undefined) {
+               if (table[position].key === key) {
+                    table[position] = undefined
+               } else {
+                   var index = ++position
+                   while (table[index] === undefined || table[index].key !== key) {
+                       index ++
+                   }
+                   if (table[index].key == key) {
+                       table[index] = undefined
+                   }
+               }
+            }
+            return undefined
+        }
+        this.print = function () {
+            for (var i = 0; i < table.length; ++i) {
+                if (table[i] !== undefined) {
+                    console.log(i + ":" + table[i])
+                }
+            }
+        }
+        
+    }
+    var hash = new HashTable();
+    hash.put('Gandalf', 'gandalf@email.com');
+    hash.put('John', 'johnsnow@email.com');
+    hash.put('Tyrion', 'tyrion@email.com');
+    hash.put('Aaron', 'aaron@email.com');
+    hash.put('Donnie', 'donnie@email.com');
+    hash.put('Ana', 'ana@email.com');
+    hash.put('Jonathan', 'jonathan@email.com');
+    hash.put('Jamie', 'jamie@email.com');
+    hash.put('Sue', 'sue@email.com');
+    hash.put('Mindy', 'mindy@email.com');
+    hash.put('Paul', 'paul@email.com');
+    hash.put('Nathan', 'nathan@email.com');
+    hash.print();
+    </script>
+</body>
+</html>
