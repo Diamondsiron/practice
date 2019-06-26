@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const forEach = (array, fn) => {
+        let i ;
+        for (i = 0; i<array.length;i++) {
+            fn(array[i])
+        }
+    }
+    var array = [1,2,3]
+    forEach(array,(data)=>console.log(data))
+    var tellType = (arg) => {
+        if (typeof arg =='function') {
+            arg()
+        } else {
+            console.log('the passed data is ' + arg)
+        }
+    }
+    var dataFn = () => {
+        console.log('I AM A FUNCTION')
+    }
+    tellType(dataFn)
+
+    let crazy = () => {return String}
+    let fn = crazy()
+    fn('HOC')
+    crazy()('HOC')
+
+    const forEachObject = (obj, fn) => {
+        for (var property in obj) {
+            if (obj.hasOwnProperty(property)) {
+                fn (property, obj[property])
+            }
+        }
+    }
+    let object = {a:1, b:2}
+    forEachObject(object, (k,v) => console.log(k+ ":" + v))
+    const unless = (predicate, fn) => {
+        if (!predicate) {
+            fn()
+        }
+    }
+    forEach([1,2,3,4,5,6],(number)=>{
+        unless((number%2),()=>{
+            console.log(number,"is even")
+        })
+    })
+    const times = (times, fn) => {
+        for (let i = 0; i < times; i++) {
+            fn(i)
+        }
+    }
+    times(10,(number) => {
+        unless(number%2, function(){
+            console.log(number, 'is even')
+        })
+    })
+
+    const every = (arr, fn) => {
+        let result = true;
+        for (let i = 0; i <arr.length; i++) {
+            result = result && fn(arr[i])
+        }
+        return result
+    }
+
+    const some = (arr, fn) => {
+        let result = false;
+        for (let i = 0; i <arr.length; i++) {
+            result = result || fn(arr[i])
+        }
+        return result
+    }
+    
+    const sortBy = (property) => {
+        return (a,b) => {
+            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0
+            return result
+        }
+    }
+
+    var people  = [
+        {firsname:'aa',lastname:'cc'},
+        {firsname:'cc',lastname:'aa'},
+        {firsname:'bb',lastname:'bb'}
+    ]
+    people.sort(sortBy('firsname'))
+    let global = 'global'
+    function outer() {
+        let outer = 'outer'
+        function inner() {
+            let a = 5;
+            console.log(outer)
+        }
+        inner()
+    }
+    outer()
+
+    const tap = (value) => {
+        (fn) => {
+            typeof(fn) == 'function' && fn(value)
+            console.log(value)
+        }
+    }
+    // forEach([1,2,3],(a)=>{
+    //     tap(a)(()=>{
+    //         console.log(a)
+    //     })
+    // })
+    [1,2,3].map(parseInt)
+    const unary = (fn) => {
+        fn.length === 1 ? fn : (arg) => fn(arg)
+    }
+    //[1,2,3].map(unary(parseInt))
+
+    const once = (fn) => {
+        let done  = false;
+        return function () {
+            return done ? undefined : ((done = true), fn.apply(this, arguments))
+        }
+    }
+    var doPayment = once(()=>{
+        console.log('payment is done!')
+    })
+    doPayment();
+    doPayment()
+
+    var factorial = (n) => {
+        if (n==0) {
+            return 1
+        }
+        return n * factorial(n-1)
+    }
+    factorial(2)
+    factorial(3)
+    const memoized = (fn) => {
+        const lookupTable = {}
+        return (arg) => lookupTable[arg] || (lookupTable[arg] = fn(arg))
+    }
+    let fastFactorial = memoized((n) => {
+        if(n==0){
+
+            return 1;
+        }
+        return n * fastFactorial(n-1)
+    })
+    fastFactorial(5)
+
+    const map = (array, fn) => {
+        let results = []
+        for (const value of array) {
+            results.push(fn(value))
+        }
+        return results
+    }
+
+    const filter = (array, fn) => {
+        let results = []
+        for (const value of array) {
+            (fn(value)) ? results.push(value) : undefined
+        }
+        return results
+    }
+    //两层数组的flatten 数组扁平化
+    const concatAll = (array, fn) => {
+        let results = []
+        for (const value of array) {
+            results.push.apply(results, value)
+        }
+        return results
+    }
+
+    const reduce = (array, fn, initialValue) => {
+        let accumlator = 0;
+        for (const value of array) {
+            accumlator = fn(accumlator, value)
+        }
+        console.log([accumlator])
+        return [accumlator]
+    } 
+    reduce([2,5,6,1,10],(acc,val)=>acc + val)
+
+    const zip = (leftArr, rightArr, fn) => {
+        let index, results = []
+        for (index = 0; index < Math.min(leftArr.length, rightArr.length); index++) {
+            results.push(fn(leftArr[index],rightArr[index]))
+        }
+    }
+
+    function variadic(a) {
+        console.log(a)
+        console.log(arguments)
+    }
+    variadic(1,2,3)
+
+    const addCurried = x => y => x + y
+
+    addCurried(4)(4)
+
+    const curry = (binaryFn) => {
+        return function(firstArg) {
+            return function(secondArg) {
+                return binaryFn(firstArg,secondArg)
+            }
+        }
+    }
+
+    const compose = (a,b) => {
+        (c) => a(b(c))
+    }
+    </script>
+</body>
+</html>
