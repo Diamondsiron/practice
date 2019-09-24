@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Point {
+            constructor(x, y) {
+                this.x = x
+                this.y = y
+            }
+            toString() {
+                return '(' + this.x + ', ' + this.y + ')';
+            }
+        }
+        new Point() instanceof Point
+        var point = new Point(2, 3);
+
+        point.toString() // (2, 3)
+
+        point.hasOwnProperty('x') // true
+        point.hasOwnProperty('y') // true
+        point.hasOwnProperty('toString') // false
+        point.__proto__.hasOwnProperty('toString') // true
+        class MyClass {
+            constructor() {
+                // ...
+            }
+            get prop() {
+                return 'getter';
+            }
+            set prop(value) {
+                console.log('setter: '+value);
+            }
+        }
+
+        let inst = new MyClass();
+
+        inst.prop = 123;
+        // setter: 123
+
+        inst.prop
+        let persons = new class {
+            constructor(name) {
+                this.name = name;
+            }
+
+            sayName() {
+                console.log(this.name);
+            }
+        }('张三');
+
+        persons.sayName(); // "张三"
+        class Logger {
+            constructor() {
+                console.log(new.target === Logger);//new命令或Reflect.construct()返回true 其他返回undifined例如用call 子类继承父类时，new.target会返回子类 利用这个特点，可以写出不能独立使用、必须继承后才能使用的类。
+                this.printName = this.printName.bind(this)
+                this.getThis = () => this
+            }
+            printName(name = 'there') {
+                this.print(`Hello ${name}`);//单独这样调取this会报错，必须在constructor中指明this
+            }
+            
+            print(text) {
+                console.log(text);
+            }
+        }
+        class Foo {
+            static classMethod() {
+                return 'hello';//static静态属性
+            }
+        }
+
+        Foo.classMethod() // 'hello'
+
+        var foo = new Foo();
+        //foo.classMethod()
+        class Bar extends Foo {
+            count = 0//写法1 写法1等价于写法2 优先采用写法1 
+            constructor() {
+                this.count = 0//写法2
+                
+            }
+        }
+
+        Bar.classMethod()
+        class Widget {
+
+            // 公有方法
+            foo (baz) {
+            this._bar(baz);
+            }
+
+            // 私有方法
+            _bar(baz) {
+            return this.snaf = baz;
+            }
+
+        // ...
+        }
+        // class Widget {
+        //     foo (baz) {
+        //         bar.call(this, baz);
+        //     }
+
+        
+        // }
+        //实现私有方法 
+        function bar(baz) {
+            return this.snaf = baz;
+        }
+        //class的继承
+        class Points {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+        }
+
+        class ColorPoint extends Points {
+            constructor(x, y, color) {
+                //this.color = color; // ReferenceError
+                super(x, y);
+                this.color = color; // 正确
+            }
+        }
+        let cp = new ColorPoint(25, 8, 'green');
+
+        cp instanceof ColorPoint // true
+        cp instanceof Point // true
+        function Person(){
+
+        }
+        var person = new Person()
+        var person1 = new Person()
+        var person2 = new Person()
+        console.log(person.__proto__ === Person.prototype,'person.__proto__ === Person.prototype');//true
+        console.log(person1.__proto__ === person2.__proto__,'person1._proto_ === person2._proto_')// true
+        console.log(person1.__proto__ === Person.prototype,'person1._proto_ === Person.prototype')// true
+        console.log(person1.__proto__ === Person.prototype.__proto__,'person1._proto_ === Person.prototype._proto_')//false
+        console.log(person1.constructor === Person,'constructor')// true
+        console.log(person.__proto__.__proto__ === Person.prototype.__proto__,'person.__proto__.__proto__ === Person.prototype.__proto__');  // true
+        console.log(person.__proto__.__proto__ === Object.prototype,'person.__proto__.__proto__ === Object.prototype');  // true
+        console.log(Person.prototype.__proto__ === Object.prototype,'Person.prototype.__proto__ === Object.prototype');  // true
+        console.log(Object.prototype.__proto__ === null);  // true
+        
+        
+    </script>
+</body>
+</html>
