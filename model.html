@@ -130,5 +130,35 @@
             }
         }
     })
+    //防抖（debounce）
+    //所谓防抖，就是指触发事件后在 n 秒内函数只能执行一次，如果在 n 秒内又触发了事件，则会重新计算函数执行时间。
+    //将多次操作合并为一次操作进行。原理是维护一个计时器，规定在delay时间后触发函数，但是在delay时间内再次触发的话，就会取消之前的计时器而重新设置。这样一来，只有最后一次操作能被触发。
+    function debounce(func, wait) {
+        let timeout
+        return function () {
+            let context = this
+            let args = arguments
+            if (timeout) {clearTimeout(timeout)}
+            timeout = setTimeout(()=>{
+                func.apply(content, args)
+            },wait)
+        }
+    }
+    //节流（throttle）
+    //所谓节流，就是指连续触发事件但是在 n 秒中只执行一次函数。
+    //wait=1000, 一秒内点击三次,后两次不触发
+    function throttle(func, wait) {
+        let timeout
+        return function() {
+            let context = this
+            let args = arguments
+            if (!timeout) {
+                timeout = setTimeout(() => {
+                    timeout = null
+                    func.apply(content, agrs)
+                },wait)
+            }
+        }
+    }
 </script>
 </html>
