@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //创建对象
+    //工厂模式
+    function createPerson(name, age, job){
+        var o = new Object()
+        o.name = name
+        o.age = age
+        o.job = job
+        o.sayName = function(){
+            alert(this.name)
+        }
+        return o
+    }
+    var person1 = createPerson('white1','28','worker')
+    //解决了创建多个相似对象的问题，没有解决对象识别的问题（怎么知道一个对象的类型 instanceof ）
+
+    //构造函数
+    function Person(name, age, job) {
+        this.name = name
+        this.age = age
+        this.job = job
+        this.sayName = function() {
+            console.log(this.name)
+        }
+    }
+    var person2 = new Person('white2','28','worker')
+    var person3 = new Person('white2','28','worker')
+    //和工厂函数相比没有显示的创造对象 直接将属性和方法赋值给this对象 没有return语句
+    //new的四个步骤
+    //创建一个新对象
+    //将构造函数的作用域赋值给该对象
+    //执行构造函数中的代码
+    //返回新对象
+    //可以用instanceof检测对象类型
+    console.log(person2 instanceof Object)
+    console.log(person2 instanceof Person)
+    //缺点每个对象都有sayName的方法 p3 和 p2 syaname是不同对象的实例化 不同实例上的同名函数不相等
+    console.log(person2.name==person3.name,person2.sayName==person3.sayName)//true,false
+    //原型链模式
+    function Per(){}
+    Per.prototype.name = 'white3'
+    Per.prototype.sayName = function () {
+        console.log(this.name)
+    }
+    var person4 = new Per()
+    var person5 = new Per()
+    console.log(person4.sayName==person4.sayName)//true
+    //解决了构造函数的问题
+    //使用hasOwnProperty方法判断什么时候是实例属性，什么时候是原型属性 true是自己的属性 false是原型属性 in 只能判断是自己的属性
+    console.log(person4.hasOwnProperty('name'))
+    person4.age=15
+    console.log(Object.keys(person4))//只有age 只有实例属性 可枚举
+    for(key in person4){
+        console.log(key,person4[key])//age name sayname 实例属性 原型属性都有
+    }
+    console.log(Object.getOwnPropertyNames(person4)) //只有实例属性 可枚举和不可枚举
+    //for in Object.keys()获得的是可枚举的 获得可枚举和不可枚举的用Object.getOwnPropertyNames()
+    console.log(person4.constructor==Per)
+    function Pers(){}
+    Pers.prototype = {
+        name:'pers'
+    }
+    var person6 = new Pers()
+    console.log(person6.constructor==Pers)
+    console.log(person6.constructor==Object)
+    //当prototype = {}的时候 constructor会被重写 person6.constructor不在等于Pers 等于Object
+    //constructor是不可枚举的 这个时候可以单独设置属性 constructor：Pers 同时变成可枚举的了
+    //Object.defineProperty(Pers.prototype,'constructor',{enumerable:false,value:Pers})
+    var person7 = new Per()
+    Per.prototype.sayName = function(){
+        console.log('hi')
+    }
+    person7.sayName()
+    //原型的动态性 先创建实例 然后修改原型 实例的方法也会改变
+     //如果重写整对象就不一样了实例中的指针指向原型而不是指向构造函数
+     //原型模式的优点是共享，这种共享对于函数非常适合 其他不适合共享的不宜用原型模式
+
+     //组合使用构造函数和原型
+     function Person1 (name) {
+         this.name = name
+     }
+     Person1.prototype.sayName = function(){
+         console.log(this.name)
+     }
+     //最常用模式
+
+     //动态原型模式
+     function Person2(name) {
+         this.name = name
+         //sayName方法不存在 才会添加上 把所有信息封装在构造函数里
+         if (typeof this.sayName !== 'function') {
+             Person2.prototype.sayName = function() {
+                 console.log(this.name)
+             }
+         }
+     }
+
+     //寄生构造函数模式
+      function Person3(name) {
+         var o = new Object()
+         o.name = name
+         o.sayName = function() {
+            console.log(this.name)
+        }
+        return o
+     }
+     var person9 = new Person3()
+     //除了用new之外和工厂函数一抹一样 instanceof不可用
+    function Arr(){
+        var value = new Array()
+        value.push.apply(value,arguments)
+        value.toP = function(){
+            return this.join("|")
+        }
+        return value
+    }
+    //没有修改array本身的构造函数 但是借用了array的方法
+    var colors = new Arr('red','blue')
+    console.log(colors.toP())
+     //稳妥构造函数
+     function Person4(name) {
+         var o = new Object()
+         o.name = name
+         o.sayName = function() {
+            console.log(name)
+        }
+        return o
+     }
+     var person10 = new Person4()
+        //不使用this除了sayName方法谁也不能访问name属性 instanceof不可用
+</script>
+<script>
+    //继承
+    //原型继承
+    function Super(){
+        this.property = true
+        this.colors = ['red', 'blue']
+    }
+    Super.prototype.getSuper = function(){
+        return this.property
+    }
+    function Sub(){
+        this.sub = false
+    }
+    //sub继承了super
+    Sub.prototype = new Super()
+    Sub.prototype.getSub = function(){
+        return this.sub
+    }
+    var instance = new Sub()
+    console.log(instance.getSuper())//true
+     console.log(instance.__proto__==Sub.prototype)
+     console.log(instance.__proto__==Super.prototype)
+      console.log(instance.__proto__==Object.prototype)
+       console.log(instance instanceof Sub)
+     console.log(instance instanceof Super)
+      console.log(instance instanceof Object)
+      console.log(Sub.prototype==Super.__proto__)//false 继承和实例化不同
+       console.log(Sub.constructor==Super)//false 继承和实例化不同
+    //不能使用对象字面量 prototype挨个定义 如果使用prototype={} 原型变成Object 原型链被切断
+    //缺点
+    //1 this.color = ['red', 'blue']引用类型在原型继承的时候会被共享 是缺点
+    //2 子类不能向父类的构造函数中传递参数
+
+    //借用构造函数
+    function Super1(){
+        this.color = ['red','blue']
+    }
+    function Sub1(){
+        //继承了super1
+        Super1.call(this)
+    }
+    var instance1 = new Sub1()
+    instance1.color.push('blcak')
+    console.log(instance1.color)
+    var instance2 = new Sub1()
+    console.log(instance2.color)
+    //通过call或者apply在创建sub实例的情况下调用super的构造函数 可想父类传递参数 有构造函数同样的问题 不同实例上同名函数不相等
+
+    //组合继承
+    function Super2(name){
+        this.name = name
+        this.color = ['red', 'blue']
+    }
+    Super2.prototype.sayName = function() {
+        console.log(this.name)
+    }
+    function Sub2(name,age){    
+        //继承属性
+        Super2.call(this,name)
+        this.age = age
+    }
+    Sub2.prototype = new Super2()
+    Sub2.prototype.sayAge = function() {
+        console.log(this.age)
+    }
+    var instance3 = new Sub2('a','1')
+    instance3.color.push('black')
+    console.log(instance3.color)
+    instance3.sayName()
+    instance3.sayAge()
+    var instance4 = new Sub2('b','2')
+    console.log(instance4.color)
+    instance4.sayName()
+    instance4.sayAge()
+    //完美 也可以使用instanceof
+
+    //原型式继承
+    function object(o) {
+        function F () {}
+        F.prototype = o
+        return new F()
+    }
+    var man = {
+        name:'1',
+        friends:['a','b']
+    }
+    var man1 = object(man)
+    man1.name = 'name1'
+    man1.friends.push('c')
+    console.log(man.friends)//a b c
+    //后来新增了Object.create()规范这种方法 在传入一个参数时候 Object.create()和object()等价
+    //不想用构造函数时候可以用这种方式 缺点和原型式继承一样 应用类型的属性始终会共享
+
+    //寄生式继承
+    function createAnother(o) {
+        var clone = object(o)
+        o.sayHi = function(){
+            console.log('hi')
+        }
+        return clone
+    }
+
+    var man2 = createAnother(man)
+    man2.sayHi()
+    //返回一个新对象 不仅有man的属性和方法 还有自己的方法 缺点不能做到函数复用 类似构造函数模式
+
+
+    //寄生组合式继承
+    //组合继承的缺点 两次调用super super.call() 和 new super()
+
+    function inheritPrototype(sub, super) {
+        var prototype = object(super.prototype)//创建对象
+        prototype.constructor = sub//增强对象
+        sub.prototype = prototype//指定对象
+    }
+
+    function Super3(name){
+        this.name = name
+        this.color = ['red', 'blue']
+    }
+    Super3.prototype.sayName = function() {
+        console.log(this.name)
+    }
+
+     function Sub3(name,age){    
+        //继承属性
+        Super3.call(this,name)
+        this.age = age
+    }
+    inheritPrototype(Sub3, Super3)
+
+    Sub2.prototype.sayAge = function() {
+        console.log(this.age)
+    }
+    //真正的高效继承 extend
+
+</script>
+</html>
