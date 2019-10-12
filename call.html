@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    Function.prototype.call2 = function(context){
+        // this 指的是函数 context指的是对象
+        //对象有了新属性
+        //执行该属性
+        //执行该方法后删除该属性
+        //其实修改的是对象
+        //没有修改this
+        context.fn = this;
+        context.fn();
+        delete context.fn;
+    }
+
+    // 测试一下
+    let foo = {
+    value: 1
+    };
+    function bar(){
+    console.log(this.value);
+    }
+    bar.call2(foo);  // 1
+    Function.prototype.call2 = function(context){
+        var context = context || window;
+        context.fn = this;
+
+        let args = [];
+        for(var i = 1,len = arguments.length; i < len; i ++){
+            args.push(arguments[i]);
+        }
+        
+        let result = context.fn(... args);
+        
+        delete context.fn;
+        return result;
+
+    }
+    Function.prototype.apply2 = function(context,arr){
+        var context = Object(context) || window;
+            context.fn = this;
+        
+        var result;
+        if(!arr){
+            result = context.fn();
+        }else{
+            result = context.fn(... arr);  // apply第二参数为数组，无需使用arguments
+        }
+
+        delete context.fn;
+        return result;
+    }  
+    Function.prototype.bind2 = function(context){
+        let self = this;
+        // 获取bind2函数 从第二个参数到最后一个参数
+        let args = Array.prototype.slice.call(arguments,1);
+
+        return function (){
+            //这里函数的arguments是指bind返回的函数入参
+            let bindArgs = Array.prototype.slice.call(arguments);
+            return self.apply(context, args.concat(bindArgs));
+        }
+    }
+        
+    </script>
+</body>
+</html>
