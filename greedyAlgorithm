@@ -1,0 +1,98 @@
+//找零钱贪心算法
+function MinCoinChange(coins){
+    var coins = coins; 
+    this.makeChange = function(amount) { 
+        var change = [], 
+        total = 0; 
+        for (var i=coins.length; i>=0; i--){ 
+            var coin = coins[i]; 
+            while (total + coin <= amount) {
+                change.push(coin);
+                total += coin; 
+            } 
+        } 
+        return change; 
+    }; 
+}
+var minCoinChange = new MinCoinChange([1, 5, 10, 25]); 
+console.log(minCoinChange.makeChange(36));
+//零钱必须顺序排序
+//y也有可能出现零钱不够的情况
+
+//背包问题贪心算法
+//质量 价格 数量 
+//贪心算法必须对条件先排序 类似二分法搜索 必须先排序
+//部分背包问题
+function knapSack(capacity, values, weights) { 
+    var n = values.length, 
+    load = 0, i = 0, val = 0; 
+    for (i = 0; i < n && load < capacity; i++) { 
+        if (weights[i] <= (capacity - load)) { 
+            val += values[i]; 
+            load += weights[i]; 
+        } else { 
+            var r = (capacity - load) / weights[i]; 
+            val += r * values[i]; 
+            load += weights[i]; 
+        } 
+    } 
+    console.log('val',val,'load',load)
+   
+   }
+var values = [5, 4, 3], 
+weights = [4, 3, 2], 
+capacity = 5; 
+//knapSack(capacity, weights, values);
+//深度遍历和广度遍历
+
+// 深度优先采用的是堆栈的形式, 即先进后出
+// 广度优先则采用的是队列的形式, 即先进先出
+const data = [
+    {
+        name: 'a',
+        children: [
+            { name: 'b', children: [{ name: 'e' }] },
+            { name: 'c', children: [{ name: 'f' }] },
+            { name: 'd', children: [{ name: 'g' }] },
+        ],
+    },
+    {
+        name: 'a2',
+        children: [
+            { name: 'b2', children: [{ name: 'e2' }] },
+            { name: 'c2', children: [{ name: 'f2' }] },
+            { name: 'd2', children: [{ name: 'g2' }] },
+        ],
+    }
+]
+
+// 深度遍历, 使用递归
+function getName(data) {
+    const result = [];
+    data.forEach(item => {
+        const map = data => {
+            result.push(data.name);
+            data.children && data.children.forEach(child => map(child));
+        }
+        map(item);
+    })
+    return result.join(',');
+}
+
+// 广度遍历, 创建一个执行队列, 当队列为空的时候则结束
+function getName2(data) {
+    let result = [];
+    let queue = data;
+    while (queue.length > 0) {
+        [...queue].forEach(child => {
+            queue.shift();
+            result.push(child.name);
+            child.children && (queue.push(...child.children));
+        });
+    }
+    return result.join(',');
+}
+
+console.log(getName(data))
+console.log(getName2(data))
+
